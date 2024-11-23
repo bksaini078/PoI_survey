@@ -12,6 +12,23 @@ st.set_page_config(
     layout="wide"
 )
 
+# Custom CSS for font sizes
+st.markdown("""
+    <style>
+    .big-font {
+        font-size:20px !important;
+        font-weight: 500;
+    }
+    .question-font {
+        font-size:18px !important;
+        margin-bottom: 10px;
+    }
+    .stRadio > label {
+        font-size: 16px !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 # Initialize session state
 if 'page' not in st.session_state:
     st.session_state.page = 0
@@ -93,7 +110,7 @@ def show_user_details_form():
                 "hobbies": hobbies
             }
             st.session_state.page += 1
-            st.experimental_rerun()
+            st.rerun()
 
 # POI comparison page
 def show_poi_comparison(poi_data, poi_index):
@@ -103,76 +120,133 @@ def show_poi_comparison(poi_data, poi_index):
     col1, col2 = st.columns(2)
     
     with col1:
-        st.subheader("Manual Version")
-        st.image(poi["imagesrc"], caption="POI Image", use_column_width=True)
-        st.write(f"**Title:** {poi['title']}")
-        st.write(f"**Description:** {poi['description']}")
+        st.subheader("POI A")
+        st.image(poi["imagesrc"], caption="POI Image", width=1000)  
+        st.markdown(f'<p class="big-font"><b>Title:</b> <br> <b> {poi["id"]}</b> </p>', unsafe_allow_html=True)
+        st.markdown(f'<p class="big-font"><b>Description: <br> </b> {poi["description"]}</p>', unsafe_allow_html=True)
         
         st.write("---")
-        st.write("**Value and Services Assessment**")
+        st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
         
+        st.markdown('<p class="question-font">Does the description effectively communicate the significance and offerings of the place?</p>', unsafe_allow_html=True)
         manual_significance = st.radio(
-            "Does the description effectively communicate the significance and offerings of the place?",
+            "",  
             options=["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
             key=f"manual_significance_{poi_index}",
             horizontal=True
         )
         
-        st.write("")  # Add some spacing
+        st.write("")
+        st.markdown('<p class="big-font"><b>Trustworthiness</b></p>', unsafe_allow_html=True)
+        st.markdown('<p class="question-font">Do you trust that this description provides accurate and reliable information about the place?</p>', unsafe_allow_html=True)
         manual_trust = st.radio(
-            "Do you trust that this description provides accurate and reliable information about the place?",
+            "",
             options=["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
             key=f"manual_trust_{poi_index}",
             horizontal=True
         )
         
-        st.write("")  # Add some spacing
+        st.write("")
+        st.markdown('<p class="big-font"><b>Clarity and Completeness</b></p>', unsafe_allow_html=True)
+        st.markdown('<p class="question-font">Is the description clear and easy to understand without omitting important details?</p>', unsafe_allow_html=True)
         manual_clarity = st.radio(
-            "Is the description clear and easy to understand without omitting important details?",
+            "",
             options=["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
             key=f"manual_clarity_{poi_index}",
             horizontal=True
         )
     
     with col2:
-        st.subheader("AI Generated Version")
-        st.image(poi["imagesrc"], caption="POI Image", use_column_width=True)
-        st.write("**Title:** [AI Generated Title]")
-        st.write("**Description:** [AI Generated Description]")
+        st.subheader("POI B")
+        st.image(poi["imagesrc"], caption="POI Image", width=1000)  
+        st.markdown('<p class="big-font"><b>Title:</b> <br> [AI Generated Title]</p>', unsafe_allow_html=True)
+        st.markdown('<p class="big-font"><b>Description:</b> <br> [AI Generated Description]</p>', unsafe_allow_html=True)
         
         st.write("---")
-        st.write("**Value and Services Assessment**")
-        
+        st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
+        st.markdown('<p class="question-font">Does the description effectively communicate the significance and offerings of the place?</p>', unsafe_allow_html=True)
         ai_significance = st.radio(
-            "Does the description effectively communicate the significance and offerings of the place?",
+            "",
             options=["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
             key=f"ai_significance_{poi_index}",
             horizontal=True
         )
         
-        st.write("")  # Add some spacing
+        st.write("")
+        st.markdown('<p class="big-font"><b>Trustworthiness</b></p>', unsafe_allow_html=True)
+        st.markdown('<p class="question-font">Do you trust that this description provides accurate and reliable information about the place?</p>', unsafe_allow_html=True)
         ai_trust = st.radio(
-            "Do you trust that this description provides accurate and reliable information about the place?",
+            "",
             options=["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
             key=f"ai_trust_{poi_index}",
             horizontal=True
         )
         
-        st.write("")  # Add some spacing
+        st.write("")
+        st.markdown('<p class="big-font"><b>Clarity and Completeness</b></p>', unsafe_allow_html=True)
+        st.markdown('<p class="question-font">Is the description clear and easy to understand without omitting important details?</p>', unsafe_allow_html=True)
         ai_clarity = st.radio(
-            "Is the description clear and easy to understand without omitting important details?",
+            "",
             options=["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
             key=f"ai_clarity_{poi_index}",
             horizontal=True
         )
     
-    st.write("")  # Add some spacing
-    visit_likelihood = st.radio(
-        "How likely are you to visit this POI?",
-        options=["Very Unlikely", "Unlikely", "Neutral", "Likely", "Very Likely"],
-        key=f"visit_{poi_index}",
+    st.write("")
+    st.markdown('<hr style="height:3px;border:none;color:#333;background-color:#333;" />', unsafe_allow_html=True)
+    
+    st.write("")
+    st.markdown('<p class="big-font"><b>Comparison Questions</b></p>', unsafe_allow_html=True)
+    
+    st.write("")
+    st.markdown('<p class="question-font">Which description did you find more engaging and appealing (captured your attention more)?</p>', unsafe_allow_html=True)
+    engaging_preference = st.radio(
+        "",
+        options=["Description A", "Description B"],
+        key=f"engaging_{poi_index}",
         horizontal=True
     )
+    
+    st.write("")
+    st.markdown('<p class="question-font">Which description did you find more relevant to your interests?</p>', unsafe_allow_html=True)
+    relevant_preference = st.radio(
+        "",
+        options=["Description A", "Description B"],
+        key=f"relevant_{poi_index}",
+        horizontal=True
+    )
+    
+    st.write("")
+    st.markdown('<p class="question-font">Which description makes you more eager to visit the POI?</p>', unsafe_allow_html=True)
+    eager_preference = st.radio(
+        "",
+        options=["Description A", "Description B"],
+        key=f"eager_{poi_index}",
+        horizontal=True
+    )
+    
+    st.write("")
+    st.markdown('<p class="question-font">Which Title do you prefer?</p>', unsafe_allow_html=True)
+    title_preference = st.radio(
+        "",
+        options=["Title A", "Title B"],
+        key=f"title_{poi_index}",
+        horizontal=True
+    )
+    
+    st.write("")
+    st.markdown('<p class="question-font">Which Description do you prefer?</p>', unsafe_allow_html=True)
+    description_preference = st.radio(
+        "",
+        options=["Description A", "Description B"],
+        key=f"description_{poi_index}",
+        horizontal=True
+    )
+    
+    st.write("")
+    st.markdown('<hr style="height:3px;border:none;color:#333;background-color:#333;" />', unsafe_allow_html=True)
+    
+    st.write("---")  # Separation line after comparison questions
     
     col1, col2, col3 = st.columns([1, 1, 1])
     
@@ -189,7 +263,11 @@ def show_poi_comparison(poi_data, poi_index):
                 "ai_significance": ai_significance,
                 "ai_trust": ai_trust,
                 "ai_clarity": ai_clarity,
-                "visit_likelihood": visit_likelihood,
+                "engaging_preference": engaging_preference,
+                "relevant_preference": relevant_preference,
+                "eager_preference": eager_preference,
+                "title_preference": title_preference,
+                "description_preference": description_preference,
                 "timestamp": datetime.now().isoformat()
             }
             st.session_state.survey_responses.append(response)

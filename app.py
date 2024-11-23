@@ -280,7 +280,7 @@ def show_user_details_form():
                 options=["Beginner", "Intermediate", "Experienced", "Expert"],
                 help="Select the option that best describes your travel experience level"
             )
-        
+        st.markdown("""<span style='color: red;'>Please fill in all required fields to proceed</span>""", unsafe_allow_html=True)
         submit_button = st.form_submit_button("Submit")
         
         if submit_button:
@@ -317,14 +317,17 @@ def show_poi_comparison(poi_data, poi_index):
     with col1:
         st.subheader("POI A")
         st.image(poi["imagesrc"],  width=800)
-        
-        st.markdown('<p class="big-font"><b>Title:</b></p>', unsafe_allow_html=True)
+        st.subheader("Title")
+        # st.markdown('<p class="big-font"><b>Title:</b></p>', unsafe_allow_html=True)
         st.markdown(f'<p class="big-font"><b>{poi["title"]}</b></p>', unsafe_allow_html=True)
-        st.markdown('<p class="big-font" style="margin-top: 10px;"><b>Description:</b></p>', unsafe_allow_html=True)
+        st.subheader("Description")
+        # st.markdown('<p class="big-font" style="margin-top: 10px;"><b>Description:</b></p>', unsafe_allow_html=True)
         st.markdown(f'<p class="big-font">{poi["description"]}</p>', unsafe_allow_html=True)
+        st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
         
+        # Assessment Container
         with st.container():
-            st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
+            # st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
             st.markdown('<p class="question-font">Does the description effectively communicate the significance and offerings of the place?</p>', unsafe_allow_html=True)
             manual_significance = st.radio(
                 "Significance",
@@ -358,15 +361,17 @@ def show_poi_comparison(poi_data, poi_index):
     with col2:
         st.subheader("POI B")
         st.image(poi["imagesrc"],  width=800)
-        
-        st.markdown('<p class="big-font"><b>Title:</b></p>', unsafe_allow_html=True)
+        st.subheader("Title")
+        # st.markdown('<p class="big-font"><b>Title:</b></p>', unsafe_allow_html=True)
         st.markdown(f'<p class="big-font"><b>{ai_content["title"]}</b></p>', unsafe_allow_html=True)
-        st.markdown('<p class="big-font" style="margin-top: 10px;"><b>Description:</b></p>', unsafe_allow_html=True)
+        st.subheader("Description")
+        # st.markdown('<p class="big-font" style="margin-top: 10px;"><b>Description:</b></p>', unsafe_allow_html=True)
         st.markdown(f'<p class="big-font">{ai_content["description"]}</p>', unsafe_allow_html=True)
         
+        st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
         # Assessment Container
         with st.container():
-            st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
+            # st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
             st.markdown('<p class="question-font">Does the description effectively communicate the significance and offerings of the place?</p>', unsafe_allow_html=True)
             ai_significance = st.radio(
                 "Significance",
@@ -443,11 +448,11 @@ def show_poi_comparison(poi_data, poi_index):
     
     st.write("")
     st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
-    
-    
+
     col1, col2, col3 = st.columns([1, 1, 1])
     
     with col2:
+        st.markdown("""<span style='color: red;'>Please fill in all required fields to proceed</span>""", unsafe_allow_html=True)
         if st.button("Next" if poi_index < len(poi_data["pois"]) - 1 else "Finish"):
             # Save response
             response = {

@@ -385,8 +385,12 @@ def show_poi_comparison(poi_data, poi_index):
     with col1:
         st.subheader("POI A")
         st.image(poi["imagesrc"], width=800)
-        st.markdown(f'<p style="font-size: 24px; text-align: center; color: #189c7d; font-weight: bold;">{poi["title"]}</p>', unsafe_allow_html=True)
-        st.markdown(f'<p class="big-font">{poi["description"]}</p>', unsafe_allow_html=True)
+        st.markdown("""
+            <div style="border: 2px solid #189c7d; padding: 20px; border-radius: 10px; margin: 10px 0;">
+                <p style="font-size: 24px; text-align: center; color: #189c7d; font-weight: bold; margin-bottom: 15px;">{}</p>
+                <p style="font-size: 18px; text-align: justify;">{}</p>
+            </div>
+        """.format(poi["title"], poi["description"]), unsafe_allow_html=True)
         st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
         
         # Assessment Container
@@ -425,9 +429,12 @@ def show_poi_comparison(poi_data, poi_index):
     with col2:
         st.subheader("POI B")
         st.image(poi["imagesrc"], width=800)
-        st.markdown(f'<p style="font-size: 24px; text-align: center; color: #189c7d; font-weight: bold;">{ai_content["title"]}</p>', unsafe_allow_html=True)
-        st.markdown(f'<p class="big-font">{ai_content["description"]}</p>', unsafe_allow_html=True)
-        
+        st.markdown("""
+            <div style="border: 2px solid #189c7d; padding: 20px; border-radius: 10px; margin: 10px 0;">
+                <p style="font-size: 24px; text-align: center; color: #189c7d; font-weight: bold; margin-bottom: 15px;">{}</p>
+                <p style="font-size: 18px; text-align: justify;">{}</p>
+            </div>
+        """.format(ai_content["title"], ai_content["description"]), unsafe_allow_html=True)
         st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
         # Assessment Container
         with st.container():

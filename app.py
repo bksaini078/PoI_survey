@@ -384,12 +384,8 @@ def show_poi_comparison(poi_data, poi_index):
     
     with col1:
         st.subheader("POI A")
-        st.image(poi["imagesrc"],  width=800)
-        st.subheader("Title")
-        # st.markdown('<p class="big-font"><b>Title:</b></p>', unsafe_allow_html=True)
-        st.markdown(f'<p class="big-font"><b>{poi["title"]}</b></p>', unsafe_allow_html=True)
-        st.subheader("Description")
-        # st.markdown('<p class="big-font" style="margin-top: 10px;"><b>Description:</b></p>', unsafe_allow_html=True)
+        st.image(poi["imagesrc"], width=800)
+        st.markdown(f'<p style="font-size: 24px; text-align: center; color: #189c7d; font-weight: bold;">{poi["title"]}</p>', unsafe_allow_html=True)
         st.markdown(f'<p class="big-font">{poi["description"]}</p>', unsafe_allow_html=True)
         st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
         
@@ -428,12 +424,8 @@ def show_poi_comparison(poi_data, poi_index):
     
     with col2:
         st.subheader("POI B")
-        st.image(poi["imagesrc"],  width=800)
-        st.subheader("Title")
-        # st.markdown('<p class="big-font"><b>Title:</b></p>', unsafe_allow_html=True)
-        st.markdown(f'<p class="big-font"><b>{ai_content["title"]}</b></p>', unsafe_allow_html=True)
-        st.subheader("Description")
-        # st.markdown('<p class="big-font" style="margin-top: 10px;"><b>Description:</b></p>', unsafe_allow_html=True)
+        st.image(poi["imagesrc"], width=800)
+        st.markdown(f'<p style="font-size: 24px; text-align: center; color: #189c7d; font-weight: bold;">{ai_content["title"]}</p>', unsafe_allow_html=True)
         st.markdown(f'<p class="big-font">{ai_content["description"]}</p>', unsafe_allow_html=True)
         
         st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
@@ -522,9 +514,9 @@ def show_poi_comparison(poi_data, poi_index):
     st.write("")
     st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns([1, 1, 1])
+    col1, col2, col3,col4,col5 = st.columns([1, 1, 1,1,1])
     
-    with col2:
+    with col3:
         st.markdown("""<span style='color: red;'>Please fill in all required fields to proceed</span>""", unsafe_allow_html=True)
         if st.button("Next" if poi_index < len(poi_data["pois"]) - 1 else "Finish"):
             # Save response
@@ -679,6 +671,13 @@ st.markdown("""
         background-color: #148268;
         transform: translateY(-1px);
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    /* Custom styling for image captions */
+    .stImage > img + div {
+        font-size: 20px !important;
+        font-weight: bold !important;
+        color: #189c7d !important;
+        margin-top: 10px !important;
     }
     </style>
     """, unsafe_allow_html=True)

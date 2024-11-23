@@ -25,9 +25,13 @@ wheels/
 venv/
 ENV/
 
-# IDE
-.idea/
+# Temporary data files
+temp_data/
+temp_poi_content_*.json
+
+# IDE specific files
 .vscode/
+.idea/
 *.swp
 *.swo
 

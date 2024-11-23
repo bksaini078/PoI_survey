@@ -1,3 +1,6 @@
-streamlit==1.27.2
-pandas==2.1.1
+streamlit
+pandas
+openai>=1.0.0
+pydantic
+python-dotenv
 pillow==10.0.1

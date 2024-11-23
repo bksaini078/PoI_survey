@@ -4,6 +4,54 @@ import pandas as pd
 from pathlib import Path
 from datetime import datetime
 import uuid
+from openai import AzureOpenAI
+from pydantic import BaseModel, Field
+from typing import Optional
+
+# Define the response model
+class POIResponse(BaseModel):
+    title: str = Field(..., description="A catchy and informative title for the POI")
+    description: str = Field(..., description="An engaging and detailed description of the POI")
+
+# Initialize Azure OpenAI client
+@st.cache_resource
+def get_openai_client():
+    return AzureOpenAI(
+        api_version="2024-08-01-preview",
+        api_key="f3b476351d86408589ac63c6a8e3cb21",  # Add your API key here
+        azure_endpoint="https://fhgenie-api-iao-idt13200.openai.azure.com/"
+    )
+
+# Generate AI content for POI
+def generate_ai_content(poi_data):
+    client = get_openai_client()
+    
+    system_prompt = """You are an expert travel writer and content creator. Your task is to create engaging, 
+    informative titles and descriptions for Points of Interest (POIs) that capture attention and provide value to potential visitors.
+    Focus on unique aspects, cultural significance, and visitor experience."""
+    
+    prompt = f"""Create a title and description for this Point of Interest:
+    Original Title: {poi_data['title']}
+    Original Description: {poi_data['description']}
+    
+    Please provide a fresh perspective while maintaining accuracy and highlighting key attractions and experiences."""
+    
+    try:
+        completion = client.beta.chat.completions.parse(
+            model="gpt-4o-2024-08-06",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt}
+            ],
+            response_format=POIResponse,
+        )
+        return completion.choices[0].message.parsed
+    except Exception as e:
+        st.error(f"Error generating AI content: {str(e)}")
+        return POIResponse(
+            title="[Error generating title]",
+            description="[Error generating description]"
+        )
 
 # Set page config
 st.set_page_config(
@@ -115,6 +163,10 @@ def show_user_details_form():
 # POI comparison page
 def show_poi_comparison(poi_data, poi_index):
     poi = poi_data["pois"][poi_index]
+    
+    # Generate AI content
+    ai_content = generate_ai_content(poi)
+    
     st.title(f"POI Comparison - {poi_index + 1}/{len(poi_data['pois'])}")
     
     col1, col2 = st.columns(2)
@@ -122,10 +174,11 @@ def show_poi_comparison(poi_data, poi_index):
     with col1:
         st.subheader("POI A")
         st.image(poi["imagesrc"], caption="POI Image", width=1000)  
-        st.markdown(f'<p class="big-font"><b>Title:</b> <br> <b> {poi["id"]}</b> </p>', unsafe_allow_html=True)
+        st.markdown(f'<p class="big-font"><b>Title:</b> <br> <b> {poi["title"]} </b> </p>', unsafe_allow_html=True)
         st.markdown(f'<p class="big-font"><b>Description: <br> </b> {poi["description"]}</p>', unsafe_allow_html=True)
-        
-        st.write("---")
+
+        st.markdown('<hr style="height:3px;border:none;color:#333;background-color:#333;" />', unsafe_allow_html=True)
+
         st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
         
         st.markdown('<p class="question-font">Does the description effectively communicate the significance and offerings of the place?</p>', unsafe_allow_html=True)
@@ -159,10 +212,10 @@ def show_poi_comparison(poi_data, poi_index):
     with col2:
         st.subheader("POI B")
         st.image(poi["imagesrc"], caption="POI Image", width=1000)  
-        st.markdown('<p class="big-font"><b>Title:</b> <br> [AI Generated Title]</p>', unsafe_allow_html=True)
-        st.markdown('<p class="big-font"><b>Description:</b> <br> [AI Generated Description]</p>', unsafe_allow_html=True)
+        st.markdown(f'<p class="big-font"><b>Title:</b> <br> <b>{ai_content.title}</b></p>', unsafe_allow_html=True)
+        st.markdown(f'<p class="big-font"><b>Description:</b> <br> {ai_content.description}</p>', unsafe_allow_html=True)
         
-        st.write("---")
+        st.markdown('<hr style="height:3px;border:none;color:#333;background-color:#333;" />', unsafe_allow_html=True)
         st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
         st.markdown('<p class="question-font">Does the description effectively communicate the significance and offerings of the place?</p>', unsafe_allow_html=True)
         ai_significance = st.radio(

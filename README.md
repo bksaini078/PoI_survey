@@ -1,5 +1,5 @@
 # POI Survey Web Application
-
+#189c7d
 A Streamlit-based web application for collecting user preferences on Points of Interest (POIs) descriptions and titles.
 
 ## Features

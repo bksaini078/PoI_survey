@@ -113,8 +113,8 @@ def generate_ai_content(poi_data, user_data):
         generated_content = completion.choices[0].message.parsed
         
         # Ensure title length constraint
-        if len(generated_content.title) > max_title_length:
-            generated_content.title = generated_content.title[:max_title_length].rsplit(' ', 1)[0]
+        # if len(generated_content.title) > max_title_length:
+        #     generated_content.title = generated_content.title[:max_title_length].rsplit(' ', 1)[0]
         
         # Ensure description length constraint
         if len(generated_content.description) > max_description_length:
@@ -134,11 +134,11 @@ def generate_all_poi_content(pois, user_data):
     temp_file = os.path.join('temp_data', f'temp_poi_content_{user_data["user_id"]}.json')
     
     # Show loading page with progress
-    st.header("Generating Point of InterestContent")
-    st.write("Please wait while we create title anddescriptions for each Point of Interest...")
+    st.header("Generating Point of Interest Content")
+    st.write("Please wait while we create title and descriptions for each Point of Interest...")
     
     # Show progress bar
-    progress_text = "Generating AI content for all POIs..."
+    progress_text = "Generating content for all POIs..."
     progress_bar = st.progress(0)
     
     ai_content = {}
@@ -316,18 +316,15 @@ def show_poi_comparison(poi_data, poi_index):
     
     with col1:
         st.subheader("POI A")
-        st.image(poi["imagesrc"], caption="POI Image", width=800)
+        st.image(poi["imagesrc"],  width=800)
         
         st.markdown('<p class="big-font"><b>Title:</b></p>', unsafe_allow_html=True)
         st.markdown(f'<p class="big-font"><b>{poi["title"]}</b></p>', unsafe_allow_html=True)
         st.markdown('<p class="big-font" style="margin-top: 10px;"><b>Description:</b></p>', unsafe_allow_html=True)
         st.markdown(f'<p class="big-font">{poi["description"]}</p>', unsafe_allow_html=True)
         
-        # Assessment Container
-        st.markdown('<div class="assessment-box">', unsafe_allow_html=True)
-        st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
-        
         with st.container():
+            st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
             st.markdown('<p class="question-font">Does the description effectively communicate the significance and offerings of the place?</p>', unsafe_allow_html=True)
             manual_significance = st.radio(
                 "Significance",
@@ -360,7 +357,7 @@ def show_poi_comparison(poi_data, poi_index):
     
     with col2:
         st.subheader("POI B")
-        st.image(poi["imagesrc"], caption="POI Image", width=800)
+        st.image(poi["imagesrc"],  width=800)
         
         st.markdown('<p class="big-font"><b>Title:</b></p>', unsafe_allow_html=True)
         st.markdown(f'<p class="big-font"><b>{ai_content["title"]}</b></p>', unsafe_allow_html=True)
@@ -368,10 +365,8 @@ def show_poi_comparison(poi_data, poi_index):
         st.markdown(f'<p class="big-font">{ai_content["description"]}</p>', unsafe_allow_html=True)
         
         # Assessment Container
-        st.markdown('<div class="assessment-box">', unsafe_allow_html=True)
-        st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
-        
         with st.container():
+            st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
             st.markdown('<p class="question-font">Does the description effectively communicate the significance and offerings of the place?</p>', unsafe_allow_html=True)
             ai_significance = st.radio(
                 "Significance",
@@ -449,7 +444,6 @@ def show_poi_comparison(poi_data, poi_index):
     st.write("")
     st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
     
-    st.write("---")  # Separation line after comparison questions
     
     col1, col2, col3 = st.columns([1, 1, 1])
     
@@ -496,18 +490,62 @@ def show_thank_you():
 st.set_page_config(
     page_title="POI Survey Application",
     page_icon="🏰",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="collapsed"
 )
 
-# Custom CSS for font sizes and containers
+# Custom CSS for theme color and containers
 st.markdown("""
     <style>
+    /* Primary theme color */
+    .stButton>button {
+        background-color: #189c7d;
+        color: white;
+        font-size: 18px !important;
+        padding: 15px 30px !important;
+        min-width: 150px;
+        height: auto !important;
+        margin: 10px 0;
+    }
+    .stButton>button:hover {
+        background-color: #148268;
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    /* Progress bar */
+    .stProgress > div > div > div > div {
+        background-color: #189c7d;
+    }
+    
+    /* Selectbox */
+    .stSelectbox [data-baseweb="select"] {
+        border-color: #189c7d;
+    }
+    
+    /* Radio buttons */
+    .stRadio > label input[type="radio"]:checked + span::before {
+        background-color: #189c7d;
+    }
+    
+    /* Headers */
+    h1, h2, h3 {
+        color: #189c7d;
+    }
+    
+    /* Info boxes */
+    .stAlert {
+        background-color: rgba(24, 156, 125, 0.1);
+        border-left-color: #189c7d;
+    }
+    
     .big-font {
-        font-size:20px !important;
+        font-size: 20px !important;
         font-weight: 500;
     }
     .question-font {
-        font-size:18px !important;
+        font-size: 18px !important;
         margin-bottom: 10px;
     }
     .stRadio > label {
@@ -518,19 +556,47 @@ st.markdown("""
         padding: 20px;
         border-radius: 10px;
         margin-bottom: 20px;
-        min-height: 200px;  /* Minimum height for content containers */
+        min-height: 200px;
+        border: 1px solid rgba(24, 156, 125, 0.2);
     }
     .assessment-box {
         background-color: #ffffff;
         padding: 20px;
         border-radius: 10px;
         margin-top: 20px;
+        border: 1px solid rgba(24, 156, 125, 0.2);
     }
     .custom-divider {
         height: 3px;
-        background-color: #333;
+        background-color: #189c7d;
         border: none;
         margin: 20px 0;
+    }
+    
+    /* Links */
+    a {
+        color: #189c7d;
+    }
+    a:hover {
+        color: #148268;
+    }
+    
+    /* Submit button specific styling */
+    div[data-testid="stForm"] button[kind="primaryFormSubmit"] {
+        background-color: #189c7d;
+        color: white;
+        border: none;
+        font-size: 18px !important;
+        padding: 15px 30px !important;
+        min-width: 150px;
+        height: auto !important;
+        border-radius: 5px;
+        margin: 10px 0;
+    }
+    div[data-testid="stForm"] button[kind="primaryFormSubmit"]:hover {
+        background-color: #148268;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     </style>
     """, unsafe_allow_html=True)

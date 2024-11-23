@@ -109,35 +109,69 @@ def show_poi_comparison(poi_data, poi_index):
         st.write(f"**Description:** {poi['description']}")
         
         st.write("---")
-        manual_title_rating = st.slider(
-            "How well does this title describe the POI? (Manual)",
-            1, 5, key=f"manual_title_{poi_index}"
+        st.write("**Value and Services Assessment**")
+        
+        manual_significance = st.radio(
+            "Does the description effectively communicate the significance and offerings of the place?",
+            options=["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            key=f"manual_significance_{poi_index}",
+            horizontal=True
         )
-        manual_desc_rating = st.slider(
-            "How well does this description align with your interests? (Manual)",
-            1, 5, key=f"manual_desc_{poi_index}"
+        
+        st.write("")  # Add some spacing
+        manual_trust = st.radio(
+            "Do you trust that this description provides accurate and reliable information about the place?",
+            options=["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            key=f"manual_trust_{poi_index}",
+            horizontal=True
+        )
+        
+        st.write("")  # Add some spacing
+        manual_clarity = st.radio(
+            "Is the description clear and easy to understand without omitting important details?",
+            options=["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            key=f"manual_clarity_{poi_index}",
+            horizontal=True
         )
     
     with col2:
         st.subheader("AI Generated Version")
         st.image(poi["imagesrc"], caption="POI Image", use_column_width=True)
-        # Replace with actual AI-generated content
         st.write("**Title:** [AI Generated Title]")
         st.write("**Description:** [AI Generated Description]")
         
         st.write("---")
-        ai_title_rating = st.slider(
-            "How well does this title describe the POI? (AI)",
-            1, 5, key=f"ai_title_{poi_index}"
+        st.write("**Value and Services Assessment**")
+        
+        ai_significance = st.radio(
+            "Does the description effectively communicate the significance and offerings of the place?",
+            options=["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            key=f"ai_significance_{poi_index}",
+            horizontal=True
         )
-        ai_desc_rating = st.slider(
-            "How well does this description align with your interests? (AI)",
-            1, 5, key=f"ai_desc_{poi_index}"
+        
+        st.write("")  # Add some spacing
+        ai_trust = st.radio(
+            "Do you trust that this description provides accurate and reliable information about the place?",
+            options=["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            key=f"ai_trust_{poi_index}",
+            horizontal=True
+        )
+        
+        st.write("")  # Add some spacing
+        ai_clarity = st.radio(
+            "Is the description clear and easy to understand without omitting important details?",
+            options=["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            key=f"ai_clarity_{poi_index}",
+            horizontal=True
         )
     
-    visit_likelihood = st.slider(
+    st.write("")  # Add some spacing
+    visit_likelihood = st.radio(
         "How likely are you to visit this POI?",
-        1, 5, key=f"visit_{poi_index}"
+        options=["Very Unlikely", "Unlikely", "Neutral", "Likely", "Very Likely"],
+        key=f"visit_{poi_index}",
+        horizontal=True
     )
     
     col1, col2, col3 = st.columns([1, 1, 1])
@@ -149,10 +183,12 @@ def show_poi_comparison(poi_data, poi_index):
                 **st.session_state.user_data,
                 "poi_id": poi["id"],
                 "poi_title": poi["title"],
-                "manual_title_rating": manual_title_rating,
-                "manual_desc_rating": manual_desc_rating,
-                "ai_title_rating": ai_title_rating,
-                "ai_desc_rating": ai_desc_rating,
+                "manual_significance": manual_significance,
+                "manual_trust": manual_trust,
+                "manual_clarity": manual_clarity,
+                "ai_significance": ai_significance,
+                "ai_trust": ai_trust,
+                "ai_clarity": ai_clarity,
                 "visit_likelihood": visit_likelihood,
                 "timestamp": datetime.now().isoformat()
             }

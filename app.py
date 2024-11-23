@@ -70,18 +70,12 @@ def generate_ai_content(poi_data, user_data):
     - The title MUST NOT exceed {max_title_length} characters
     - Be concise while maintaining informativeness"""
     
-    # Process children details for better prompt formatting
-    children_info = user_data.get('children_details', 'None')
-    if children_info and children_info.strip().lower() not in ['none', 'no', '']:
-        family_context = f"Has children: {children_info}"
-    else:
-        family_context = "No children"
     
     prompt = f"""Create a title and description for this Point of Interest, personalized for the following user:
     User Age: {user_data.get('age', 'Not specified')}
     User Gender: {user_data.get('gender', 'Not specified')}
     Marital Status: {user_data.get('marital_status', 'Not specified')}
-    Family Context: {family_context}
+    Have Children: {user_data.get('has_children', 'Not specified')}
     User Interests: {user_data.get('interests', 'Not specified')}
     User Travel Experience: {user_data.get('travel_experience', 'Not specified')}
     Education Level: {user_data.get('education', 'Not specified')}
@@ -140,8 +134,8 @@ def generate_all_poi_content(pois, user_data):
     temp_file = os.path.join('temp_data', f'temp_poi_content_{user_data["user_id"]}.json')
     
     # Show loading page with progress
-    st.title("Generating Personalized Content")
-    st.write("Please wait while we create personalized descriptions for each location...")
+    st.header("Generating Point of InterestContent")
+    st.write("Please wait while we create title anddescriptions for each Point of Interest...")
     
     # Show progress bar
     progress_text = "Generating AI content for all POIs..."
@@ -206,7 +200,7 @@ def show_user_details_form():
         col1, col2 = st.columns(2)
         
         with col1:
-            age = st.number_input("Age", min_value=0, max_value=120)
+            age = st.number_input("Age", min_value=0, max_value=120, value=25)
             has_children = st.selectbox(
                 "Do you have children?",
                 ["No", "Yes"]
@@ -222,13 +216,6 @@ def show_user_details_form():
                 "Marital Status",
                 ["Single", "Married", "In a Relationship", "Divorced", "Widowed", "Prefer not to say"]
             )
-            if has_children == "Yes":
-                children_details = st.text_input(
-                    "Children's Ages",
-                    help="Please specify ages of children. Example: '5, 8'"
-                )
-            else:
-                children_details = "No children"
         
         # Additional Information
         st.markdown('<p class="big-font"><b>Additional Information</b></p>', unsafe_allow_html=True)
@@ -303,7 +290,6 @@ def show_user_details_form():
                 'gender': gender,
                 'marital_status': marital_status,
                 'has_children': has_children,
-                'children_details': children_details if has_children == "Yes" else "No children",
                 'nationality': nationality,
                 'disability': disability,
                 'pets': pets,
@@ -324,13 +310,13 @@ def show_poi_comparison(poi_data, poi_index):
         'description': '[Error loading description]'
     })
     
-    st.title(f"POI Comparison - {poi_index + 1}/{len(poi_data['pois'])}")
+    st.title(f"Point of Interest  - {poi_index + 1}/{len(poi_data['pois'])}")
     
     col1, col2 = st.columns(2)
     
     with col1:
         st.subheader("POI A")
-        st.image(poi["imagesrc"], caption="POI Image", width=1000)
+        st.image(poi["imagesrc"], caption="POI Image", width=800)
         
         st.markdown('<p class="big-font"><b>Title:</b></p>', unsafe_allow_html=True)
         st.markdown(f'<p class="big-font"><b>{poi["title"]}</b></p>', unsafe_allow_html=True)
@@ -374,7 +360,7 @@ def show_poi_comparison(poi_data, poi_index):
     
     with col2:
         st.subheader("POI B")
-        st.image(poi["imagesrc"], caption="POI Image", width=1000)
+        st.image(poi["imagesrc"], caption="POI Image", width=800)
         
         st.markdown('<p class="big-font"><b>Title:</b></p>', unsafe_allow_html=True)
         st.markdown(f'<p class="big-font"><b>{ai_content["title"]}</b></p>', unsafe_allow_html=True)
@@ -593,6 +579,6 @@ def main():
         if not poi_data:
             return
         show_poi_comparison(poi_data, st.session_state.page - 1)
-
+    
 if __name__ == "__main__":
     main()

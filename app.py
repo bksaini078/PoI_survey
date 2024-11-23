@@ -405,21 +405,23 @@ def show_poi_comparison(poi_data, poi_index):
     # Comparison Questions Section
     st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
     st.markdown('<p class="big-font"><b>Comparison Questions</b></p>', unsafe_allow_html=True)
-    
-    st.markdown('<p class="question-font">Which description did you find more engaging and appealing (captured your attention more)?</p>', unsafe_allow_html=True)
-    engaging_preference = st.radio(
-        "",
-        options=["Description A", "Description B"],
-        key=f"engaging_{poi_index}",
-        horizontal=True
-    )
+    with st.container():
+        st.markdown('<p class="question-font">Which description did you find more engaging and appealing (captured your attention more)?</p>', unsafe_allow_html=True)
+        engaging_preference = st.radio(
+            "",
+            options=["Description A", "Description B"],
+            key=f"engaging_{poi_index}",
+            horizontal=True,
+            label_visibility="collapsed"
+        )
     
     st.markdown('<p class="question-font">Which description did you find more relevant to your interests?</p>', unsafe_allow_html=True)
     relevant_preference = st.radio(
         "",
         options=["Description A", "Description B"],
         key=f"relevant_{poi_index}",
-        horizontal=True
+        horizontal=True,
+        label_visibility="collapsed"
     )
     
     st.markdown('<p class="question-font">Which description makes you more eager to visit the POI?</p>', unsafe_allow_html=True)
@@ -427,15 +429,17 @@ def show_poi_comparison(poi_data, poi_index):
         "",
         options=["Description A", "Description B"],
         key=f"eager_{poi_index}",
-        horizontal=True
+        horizontal=True,
+        label_visibility="collapsed"
     )
-    
+    # st.text("Which Title do you prefer?")
     st.markdown('<p class="question-font">Which Title do you prefer?</p>', unsafe_allow_html=True)
     title_preference = st.radio(
         "",
         options=["Title A", "Title B"],
         key=f"title_{poi_index}",
-        horizontal=True
+        horizontal=True,
+        label_visibility="collapsed"
     )
     
     st.markdown('<p class="question-font">Which Description do you prefer?</p>', unsafe_allow_html=True)
@@ -443,7 +447,8 @@ def show_poi_comparison(poi_data, poi_index):
         "",
         options=["Description A", "Description B"],
         key=f"description_{poi_index}",
-        horizontal=True
+        horizontal=True,
+        label_visibility="collapsed"
     )
     
     st.write("")

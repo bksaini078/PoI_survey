@@ -18,9 +18,20 @@ from openai import AzureOpenAI
 import os
 from dotenv import load_dotenv
 import time
+import base64
 
-# Load environment variables
+
 load_dotenv()
+
+def img_to_bytes(img_path):
+    img_bytes = Path(img_path).read_bytes()
+    encoded = base64.b64encode(img_bytes).decode()
+    return encoded
+def img_to_html(img_path):
+    img_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(
+      img_to_bytes(img_path)
+    )
+    return img_html
 
 # Constants
 NATIONALITIES = [
@@ -380,19 +391,37 @@ def show_poi_comparison(poi_data, poi_index):
     
     st.title(f"Point of Interest  - {poi_index + 1}/{len(poi_data['pois'])}")
     
+    st.markdown("""
+        <style>
+        .content-box {
+            border: 2px solid #189c7d;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
     col1, col2 = st.columns(2)
     
     with col1:
         st.subheader("POI A")
-        st.image(poi["imagesrc"], width=800)
-        st.markdown("""
-            <div style="border: 2px solid #189c7d; padding: 20px; border-radius: 10px; margin: 10px 0;">
-                <p style="font-size: 24px; text-align: center; color: #189c7d; font-weight: bold; margin-bottom: 15px;">{}</p>
-                <p style="font-size: 18px; text-align: justify;">{}</p>
+        st.markdown(f"""
+            <div style="
+                border: 1px solid #189c7d; 
+                border-radius: 10px; 
+                padding: 20px; 
+                background-color: #f9f9f9; 
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                text-align: center;
+                margin-bottom: 20px;">
+                {img_to_html(poi["imagesrc"])}
+                <p style="font-size: 24px; color: #189c7d; font-weight: bold; margin: 15px 0;">{poi["title"]}</p>
+                <p style="font-size: 18px; text-align: justify; margin-bottom: 20px;">{poi["description"]}</p>
             </div>
-        """.format(poi["title"], poi["description"]), unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
+
         st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
-        
         # Assessment Container
         with st.container():
             # st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
@@ -428,13 +457,27 @@ def show_poi_comparison(poi_data, poi_index):
     
     with col2:
         st.subheader("POI B")
-        st.image(poi["imagesrc"], width=800)
-        st.markdown("""
-            <div style="border: 2px solid #189c7d; padding: 20px; border-radius: 10px; margin: 10px 0;">
-                <p style="font-size: 24px; text-align: center; color: #189c7d; font-weight: bold; margin-bottom: 15px;">{}</p>
-                <p style="font-size: 18px; text-align: justify;">{}</p>
+        st.markdown(f"""
+            <div style="
+                border: 1px solid #189c7d; 
+                border-radius: 10px; 
+                padding: 20px; 
+                background-color: #f9f9f9; 
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                text-align: center;
+                margin-bottom: 20px;">
+                {img_to_html(poi["imagesrc"])}
+                <p style="font-size: 24px; color: #189c7d; font-weight: bold; margin: 15px 0;">{ai_content["title"]}</p>
+                <p style="font-size: 18px; text-align: justify; margin-bottom: 20px;">{ai_content["description"]}</p>
             </div>
-        """.format(ai_content["title"], ai_content["description"]), unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
+        # st.markdown('<div style="border: 2px solid #189c7d; border-radius: 10px; padding: 20px; margin: 10px 0;">', unsafe_allow_html=True)
+        # st.image(poi["imagesrc"], width=600)
+        # st.markdown(f"""
+        #     <p style="font-size: 24px; text-align: center; color: #189c7d; font-weight: bold; margin: 15px 0;">{ai_content["title"]}</p>
+        #     <p style="font-size: 18px; text-align: justify; margin-bottom: 20px;">{ai_content["description"]}</p>
+        #     </div>
+        # """, unsafe_allow_html=True)
         st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
         # Assessment Container
         with st.container():

@@ -1,14 +1,26 @@
+"""
+POI Survey Application
+
+This application conducts a survey comparing original and AI-generated Point of Interest (POI) descriptions.
+It collects user demographic information and preferences, then presents pairs of descriptions for comparison.
+
+The application uses Streamlit for the UI and stores responses in CSV format.
+"""
+
 import streamlit as st
 import json
-import pandas as pd
-from pathlib import Path
 from datetime import datetime
 import uuid
-from openai import AzureOpenAI
+from pathlib import Path
+import pandas as pd
 from pydantic import BaseModel, Field
-from typing import Optional
-import time
+from openai import AzureOpenAI
 import os
+from dotenv import load_dotenv
+import time
+
+# Load environment variables
+load_dotenv()
 
 # Constants
 NATIONALITIES = [
@@ -47,13 +59,31 @@ class POIResponse(BaseModel):
 # Initialize Azure OpenAI client
 @st.cache_resource
 def get_openai_client():
+    """
+    Initialize Azure OpenAI client with API key and endpoint.
+    
+    Returns:
+        AzureOpenAI: Azure OpenAI client instance
+    """
     return AzureOpenAI(
-        api_version="2024-08-01-preview",
-        api_key="f3b476351d86408589ac63c6a8e3cb21",  # Add your API key here
-        azure_endpoint="https://fhgenie-api-iao-idt13200.openai.azure.com/"
+        api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
+        api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+        azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT")
     )
 
 def generate_ai_content(poi_data, user_data):
+    """
+    Generate AI content for a given POI and user data.
+    
+    Uses Azure OpenAI client to generate title and description based on user preferences.
+    
+    Args:
+        poi_data (dict): Dictionary containing POI information
+        user_data (dict): Dictionary containing user demographic information and preferences
+    
+    Returns:
+        POIResponse: POIResponse instance containing generated title and description
+    """
     client = get_openai_client()
     
     # Calculate maximum length for the description
@@ -130,7 +160,16 @@ def generate_ai_content(poi_data, user_data):
         )
 
 def generate_all_poi_content(pois, user_data):
-    """Generate AI content for all POIs and save to temporary file"""
+    """
+    Generate AI content for all POIs and save to temporary file.
+    
+    Args:
+        pois (list): List of POI dictionaries
+        user_data (dict): Dictionary containing user demographic information and preferences
+    
+    Returns:
+        dict: Dictionary containing generated AI content for each POI
+    """
     temp_file = os.path.join('temp_data', f'temp_poi_content_{user_data["user_id"]}.json')
     
     # Show loading page with progress
@@ -162,6 +201,12 @@ def generate_all_poi_content(pois, user_data):
 
 # Load POI data
 def load_poi_data():
+    """
+    Load POI data from the JSON file.
+    
+    Returns:
+        dict: Dictionary containing POI data including categories and descriptions
+    """
     try:
         with open('data/pois.json', 'r') as f:
             data = json.load(f)
@@ -183,6 +228,10 @@ def load_poi_data():
 
 # Save survey response
 def save_response():
+    """
+    Save survey responses to a CSV file.
+    Creates a new CSV file with timestamp in the filename.
+    """
     if not st.session_state.survey_responses:
         return
     
@@ -194,6 +243,15 @@ def save_response():
 
 # User details form
 def show_user_details_form():
+    """
+    Display and process the user details form.
+    
+    Collects demographic information, preferences, and travel experience.
+    Form includes personal information, additional details, and travel preferences.
+    
+    Returns:
+        bool: True if form is submitted successfully, False otherwise
+    """
     with st.form("user_details_form"):
         # Personal Information
         st.markdown('<p class="big-font"><b>Personal Information</b></p>', unsafe_allow_html=True)
@@ -304,6 +362,16 @@ def show_user_details_form():
 
 # POI comparison page
 def show_poi_comparison(poi_data, poi_index):
+    """
+    Display POI comparison page for evaluation.
+    
+    Shows original and AI-generated descriptions side by side for comparison.
+    Collects user ratings and preferences through various assessment criteria.
+    
+    Args:
+        poi_data (dict): Dictionary containing POI information
+        poi_index (int): Index of the current POI being compared
+    """
     poi = poi_data["pois"][poi_index]
     ai_content = st.session_state.ai_content.get(poi['id'], {
         'title': '[Error loading title]',
@@ -488,6 +556,10 @@ def show_poi_comparison(poi_data, poi_index):
 
 # Thank you page
 def show_thank_you():
+    """
+    Display thank you page after survey completion.
+    Shows appreciation message and confirms response recording.
+    """
     st.title("Thank You!")
     st.write("Your responses have been recorded. Thank you for participating in the survey!")
     if st.button("Start New Survey"):
@@ -629,6 +701,16 @@ if 'user_id' not in st.session_state:
 
 # Main app logic
 def main():
+    """
+    Main function to run the POI survey application.
+    
+    Handles the flow of the survey:
+    1. User details collection
+    2. POI comparisons
+    3. Thank you page
+    
+    Also manages session state and navigation between pages.
+    """
     if st.session_state.page == 0:
         st.title("Welcome to the POI Survey")
         st.write("Please provide some information about yourself to get personalized POI descriptions.")

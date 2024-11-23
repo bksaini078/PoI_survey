@@ -1,6 +1,8 @@
 streamlit
 pandas
-openai>=1.0.0
+openai
 pydantic
 python-dotenv
 pillow==10.0.1
+uuid
+pathlib

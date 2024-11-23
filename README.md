@@ -1,79 +1,139 @@
-# POI Survey Web Application
-#189c7d
-A Streamlit-based web application for collecting user preferences on Points of Interest (POIs) descriptions and titles.
+# POI Survey Application
+
+A sophisticated survey application that compares original Point of Interest (POI) descriptions with AI-generated alternatives, collecting user feedback and preferences.
 
 ## Features
 
-- User details collection form
-- Dynamic POI comparison pages
-- Side-by-side comparison of manual and AI-generated content
-- User feedback collection through ratings
-- Automatic response saving in CSV format
+### User Profiling
+- Comprehensive demographic information collection
+- Travel preferences and experience level assessment
+- Accessibility needs consideration
+- Pet travel preferences
+- Professional background collection
 
-## Prerequisites
+### POI Comparison System
+- Side-by-side comparison of original and AI-generated descriptions
+- Multiple assessment criteria:
+  - Communication effectiveness
+  - Trust level
+  - Clarity of information
+  - Engagement level
+  - Relevance to user interests
+  - Visit motivation
+  - Title and description preferences
 
-- Python 3.8 or higher
-- Required packages listed in `requirements.txt`
+### AI Integration
+- Azure OpenAI integration for content generation
+- Personalized POI descriptions based on user profile
+- Dynamic content adaptation to match original description length
 
-## Installation
+### Data Collection
+- UUID-based user tracking
+- Comprehensive response storage in CSV format
+- Timestamp-based file organization
 
-1. Clone the repository
-2. Create a virtual environment (recommended):
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Technical Stack
 
-## Data Structure
+- **Frontend**: Streamlit
+- **AI Service**: Azure OpenAI (GPT-4)
+- **Data Storage**: CSV, JSON
+- **Language**: Python 3.x
 
-Place your POI data in `data/pois.json` with the following structure:
+## Dependencies
 
-```json
-{
-  "name": "Category Name",
-  "color": "color-code",
-  "pois": [
-    {
-      "id": 1,
-      "position": [lat, long],
-      "title": "POI Title",
-      "description": "POI Description",
-      "imagesrc": "path/to/image",
-      "source": "source-url"
-    }
-  ]
-}
 ```
-
-## Running the Application
-
-1. Ensure your POI data is in place at `data/pois.json`
-2. Run the Streamlit application:
-   ```bash
-   streamlit run app.py
-   ```
-3. Open your browser and navigate to the provided URL (typically http://localhost:8501)
-
-## Survey Results
-
-Survey responses are automatically saved in the `survey_results` directory with timestamps in CSV format.
+streamlit
+pandas
+openai
+python-dotenv
+uuid
+pathlib
+```
 
 ## Project Structure
 
 ```
-poi_survey/
+PoI_survey/
 ├── app.py              # Main application file
-├── requirements.txt    # Python dependencies
-├── README.md          # This file
-├── data/              # Directory for input data
-│   └── pois.json      # POI data file
-└── survey_results/    # Directory for survey responses
+├── data/
+│   └── pois.json      # POI descriptions and metadata
+├── survey_results/     # Survey response storage
+├── assets/
+│   └── images/        # POI images
+├── temp_data/         # Temporary AI-generated content
+└── .env               # Environment variables
 ```
+
+## Setup and Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/bksaini078/PoI_survey.git
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file with:
+   ```
+   AZURE_OPENAI_API_KEY=your_api_key
+   AZURE_OPENAI_ENDPOINT=your_endpoint
+   ```
+
+4. Run the application:
+   ```bash
+   streamlit run app.py
+   ```
+
+## Usage
+
+1. **User Information Collection**
+   - Fill in demographic details
+   - Select travel preferences
+   - Indicate experience level
+
+2. **POI Comparison**
+   - View original and AI-generated descriptions
+   - Rate various aspects of each description
+   - Indicate preferences between versions
+
+3. **Data Collection**
+   - Responses automatically saved to CSV
+   - Unique session ID assigned to each survey
+   - Timestamps added to all responses
+
+## Styling
+
+The application uses a consistent color theme (#189c7d) and responsive design elements:
+- Large, readable fonts for descriptions
+- Horizontal radio buttons for easy comparison
+- Clear section dividers
+- Responsive image sizing
+
+## Data Security
+
+- No personal identifying information stored
+- UUID-based session tracking
+- Secure API key management
+- Local data storage
 
 ## Contributing
 
-Feel free to submit issues and enhancement requests!
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Stuttgart Tourism Board for POI information
+- Streamlit team for the framework
+- Azure OpenAI team for API support

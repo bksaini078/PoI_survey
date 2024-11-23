@@ -132,8 +132,3 @@ The application uses a consistent color theme (#189c7d) and responsive design el
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
-
-- Stuttgart Tourism Board for POI information
-- Streamlit team for the framework
-- Azure OpenAI team for API support

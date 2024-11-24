@@ -569,7 +569,7 @@ def show_poi_comparison(poi_data, poi_index):
 
     with col3:
         st.markdown("""<span style='color: red;'>Please verify if all required fields are entered.</span>""", unsafe_allow_html=True)
-        if st.button("Next" if poi_index < len(poi_data["pois"]) - 1 else "Finish"):
+        if st.button("Next" if poi_index < len(poi_data["pois"]) - 1 else "Finish", type="primary", use_container_width=False):
             # Save response
             response = {
                 **st.session_state.user_data,
@@ -605,7 +605,7 @@ def show_thank_you():
     """
     st.title("Thank You!")
     st.write("Your responses have been recorded. Thank you for participating in the survey!")
-    if st.button("Start New Survey"):
+    if st.button("Start New Survey", type="primary", use_container_width=False):
         st.session_state.page = 0
         st.session_state.user_data = {}
         st.session_state.survey_responses = []
@@ -623,20 +623,32 @@ st.set_page_config(
 st.markdown("""
     <style>
     /* Primary theme color */
-    .stButton>button {
-        background-color: #189c7d;
-        color: white;
-        font-size: 18px !important;
-        padding: 15px 30px !important;
-        min-width: 150px;
-        height: auto !important;
-        margin: 10px 0;
+    div.stButton > button:first-child {
+        background-color: #189c7d !important;
+        color: white !important;
+        padding: 0.75rem 2.5rem;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: auto;
+        transition: background-color 0.3s ease;
     }
-    .stButton>button:hover {
-        background-color: #148268;
-        color: white;
-        transform: translateY(-1px);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+    div.stButton > button:hover {
+        background-color: #147c63 !important;
+        border-color: #147c63 !important;
+    }
+    
+    div.stButton > button:active {
+        background-color: #126e58 !important;
+        border-color: #126e58 !important;
+    }
+
+    div.stButton > button:focus {
+        box-shadow: none;
+        outline: none;
+        border-color: #189c7d !important;
     }
     
     /* Progress bar */
@@ -729,6 +741,31 @@ st.markdown("""
         font-weight: bold !important;
         color: #189c7d !important;
         margin-top: 10px !important;
+    }
+    button.st-emotion-cache-19rxjzo {
+        background-color: #189c7d !important;
+        border: 1px solid #189c7d !important;
+        padding: 0.75rem 2.5rem !important;
+        color: white !important;
+    }
+
+    button.st-emotion-cache-19rxjzo:hover {
+        background-color: #147c63 !important;
+        border-color: #147c63 !important;
+        color: white !important;
+    }
+
+    button.st-emotion-cache-19rxjzo:active {
+        background-color: #126e58 !important;
+        border-color: #126e58 !important;
+        color: white !important;
+    }
+
+    /* Style for form submit button */
+    button[kind="primaryFormSubmit"] {
+        background-color: #189c7d !important;
+        border: 1px solid #189c7d !important;
+        color: white !important;
     }
     </style>
     """, unsafe_allow_html=True)

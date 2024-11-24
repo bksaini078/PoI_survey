@@ -8,6 +8,7 @@ The application uses Streamlit for the UI and stores responses in CSV format.
 """
 
 import streamlit as st
+import streamlit.components.v1 as components
 import json
 from datetime import datetime
 import uuid
@@ -590,12 +591,26 @@ def show_poi_comparison(poi_data, poi_index):
     )
     
     st.write("")
+    st.markdown("""<span style='color: red;'>Please verify if all required fields are entered.</span>""", unsafe_allow_html=True)
     st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
 
     col1, col2, col3,col4,col5 = st.columns([1, 1, 1, 1, 1])
 
     with col3:
-        st.markdown("""<span style='color: red;'>Please verify if all required fields are entered.</span>""", unsafe_allow_html=True)
+        # Add page numbers
+        st.markdown(f"""
+            <div style='
+                text-align: left;
+                padding: 10px;
+                margin-bottom: 10px;
+                color: #189c7d;
+                font-weight: bold;
+                font-size: 1.1em;
+            '>
+                Page {poi_index + 1} of {len(poi_data["pois"])}
+            </div>
+        """, unsafe_allow_html=True)
+        
         if st.button("Next" if poi_index < len(poi_data["pois"]) - 1 else "Finish", type="primary", use_container_width=False):
             # Save response
             response = {
@@ -617,7 +632,6 @@ def show_poi_comparison(poi_data, poi_index):
                 "timestamp": datetime.now().isoformat()
             }
             st.session_state.survey_responses.append(response)
-            
             if poi_index < len(poi_data["pois"]) - 1:
                 st.session_state.page += 1
             else:

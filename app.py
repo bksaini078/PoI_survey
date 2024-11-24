@@ -19,6 +19,7 @@ import os
 from dotenv import load_dotenv
 import time
 import base64
+import random
 
 
 load_dotenv()
@@ -393,6 +394,28 @@ def show_poi_comparison(poi_data, poi_index):
         'description': '[Error loading description]'
     })
     
+    # Randomly decide which description (manual or AI) appears first
+    is_manual_first = random.choice([True, False])
+    
+    # Store the order in session state for this POI
+    if f'order_poi_{poi["id"]}' not in st.session_state:
+        st.session_state[f'order_poi_{poi["id"]}'] = is_manual_first
+    else:
+        is_manual_first = st.session_state[f'order_poi_{poi["id"]}']
+    
+    # Prepare content based on random order
+    description_a = {
+        "title": poi["title"] if is_manual_first else ai_content["title"],
+        "description": poi["description"] if is_manual_first else ai_content["description"],
+        "imagesrc": poi["imagesrc"]
+    }
+    
+    description_b = {
+        "title": ai_content["title"] if is_manual_first else poi["title"],
+        "description": ai_content["description"] if is_manual_first else poi["description"],
+        "imagesrc": poi["imagesrc"]
+    }
+    
     st.title(f"Point of Interest  - {poi_index + 1}/{len(poi_data['pois'])}")
     
     st.markdown("""
@@ -419,9 +442,9 @@ def show_poi_comparison(poi_data, poi_index):
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
                 text-align: center;
                 margin-bottom: 20px;">
-                {img_to_html(poi["imagesrc"])}
-                <p style="font-size: 24px; color: #189c7d; font-weight: bold; margin: 15px 0;">{poi["title"]}</p>
-                <p style="font-size: 18px; text-align: justify; margin-bottom: 20px;">{poi["description"]}</p>
+                {img_to_html(description_a["imagesrc"])}
+                <p style="font-size: 24px; color: #189c7d; font-weight: bold; margin: 15px 0;">{description_a["title"]}</p>
+                <p style="font-size: 18px; text-align: justify; margin-bottom: 20px;">{description_a["description"]}</p>
             </div>
         """, unsafe_allow_html=True)
 
@@ -471,9 +494,9 @@ def show_poi_comparison(poi_data, poi_index):
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
                 text-align: center;
                 margin-bottom: 20px;">
-                {img_to_html(poi["imagesrc"])}
-                <p style="font-size: 24px; color: #189c7d; font-weight: bold; margin: 15px 0;">{ai_content["title"]}</p>
-                <p style="font-size: 18px; text-align: justify; margin-bottom: 20px;">{ai_content["description"]}</p>
+                {img_to_html(description_b["imagesrc"])}
+                <p style="font-size: 24px; color: #189c7d; font-weight: bold; margin: 15px 0;">{description_b["title"]}</p>
+                <p style="font-size: 18px; text-align: justify; margin-bottom: 20px;">{description_b["description"]}</p>
             </div>
         """, unsafe_allow_html=True)
 
@@ -575,6 +598,7 @@ def show_poi_comparison(poi_data, poi_index):
                 **st.session_state.user_data,
                 "poi_id": poi["id"],
                 "poi_title": poi["title"],
+                "is_manual_first": is_manual_first,  # Add this to track which description was shown first
                 "manual_significance": manual_significance,
                 "manual_trust": manual_trust,
                 "manual_clarity": manual_clarity,

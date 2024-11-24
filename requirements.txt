@@ -1,8 +1,8 @@
-streamlit
-pandas
-openai
-pydantic
-python-dotenv
-pillow==10.0.1
-uuid
-pathlib
+streamlit>=1.28.0
+pandas>=2.0.0
+pydantic>=2.0.0
+openai>=1.3.0
+python-dotenv>=1.0.0
+pillow
+uuid>=1.30
+pathlib>=1.0.1

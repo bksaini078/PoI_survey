@@ -182,7 +182,11 @@ def generate_all_poi_content(pois, user_data):
     Returns:
         dict: Dictionary containing generated AI content for each POI
     """
-    temp_file = os.path.join('temp_data', f'temp_poi_content_{user_data["user_id"]}.json')
+    # Create temp_data directory if it doesn't exist
+    temp_dir = Path('temp_data')
+    temp_dir.mkdir(exist_ok=True)
+    
+    temp_file = temp_dir / f'temp_poi_content_{user_data["user_id"]}.json'
     
     # Show loading page with progress
     st.header("Generating Point of Interest Content")
@@ -661,7 +665,8 @@ st.markdown("""
     
     div.stButton > button:hover {
         background-color: #147c63 !important;
-        border-color: #147c63 !important;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
     div.stButton > button:active {

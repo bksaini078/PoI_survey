@@ -265,7 +265,8 @@ def show_user_details_form():
     """
     with st.form("user_details_form"):
         # Personal Information
-        st.markdown('<p class="big-font"><b>Personal Information</b></p>', unsafe_allow_html=True)
+        # st.markdown('<p class="big-font"><b>Personal Information</b></p>', unsafe_allow_html=True)
+        st.subheader("Personal Information")
         col1, col2 = st.columns(2)
         
         with col1:
@@ -287,7 +288,8 @@ def show_user_details_form():
             )
         
         # Additional Information
-        st.markdown('<p class="big-font"><b>Additional Information</b></p>', unsafe_allow_html=True)
+        # st.markdown('<p class="big-font"><b>Additional Information</b></p>', unsafe_allow_html=True)
+        st.subheader("Additional Information")
         col3, col4 = st.columns(2)
         
         with col3:
@@ -310,14 +312,15 @@ def show_user_details_form():
             )
             if profession_type == "Other":
                 profession = st.text_input(
-                    "Please specify your profession",
-                    help="Enter your specific profession"
+                    "Please specify your occupation",
+                    help="Enter your specific occupation"
                 )
             else:
                 profession = profession_type
         
         # Interests and Hobbies
-        st.markdown('<p class="big-font"><b>Interests and Preferences</b></p>', unsafe_allow_html=True)
+        #st.markdown('<p class="big-font"><b>Interests and Preferences</b></p>', unsafe_allow_html=True)
+        st.subheader("Interests and Preferences")
         col5, col6 = st.columns(2)
         
         with col5:
@@ -347,9 +350,10 @@ def show_user_details_form():
             travel_experience = st.radio(
                 "Travel Experience Level",
                 options=["Beginner", "Intermediate", "Experienced", "Expert"],
-                help="Select the option that best describes your travel experience level"
+                help="Select the option that best describes your travel experience level",
+                horizontal=True
             )
-        st.markdown("""<span style='color: red;'>Please fill in all required fields to proceed</span>""", unsafe_allow_html=True)
+        st.markdown("""<span style='color: red;'>Please verify if you have filled all required fields before you click submit button</span>""", unsafe_allow_html=True)
         submit_button = st.form_submit_button("Submit")
         
         if submit_button:
@@ -422,6 +426,7 @@ def show_poi_comparison(poi_data, poi_index):
         """, unsafe_allow_html=True)
 
         st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
+        st.subheader("Assesment for POI A")
         # Assessment Container
         with st.container():
             # st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
@@ -471,14 +476,9 @@ def show_poi_comparison(poi_data, poi_index):
                 <p style="font-size: 18px; text-align: justify; margin-bottom: 20px;">{ai_content["description"]}</p>
             </div>
         """, unsafe_allow_html=True)
-        # st.markdown('<div style="border: 2px solid #189c7d; border-radius: 10px; padding: 20px; margin: 10px 0;">', unsafe_allow_html=True)
-        # st.image(poi["imagesrc"], width=600)
-        # st.markdown(f"""
-        #     <p style="font-size: 24px; text-align: center; color: #189c7d; font-weight: bold; margin: 15px 0;">{ai_content["title"]}</p>
-        #     <p style="font-size: 18px; text-align: justify; margin-bottom: 20px;">{ai_content["description"]}</p>
-        #     </div>
-        # """, unsafe_allow_html=True)
+
         st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
+        st.subheader("Assesment for POI B")
         # Assessment Container
         with st.container():
             # st.markdown('<p class="big-font"><b>Value and Services Assessment</b></p>', unsafe_allow_html=True)
@@ -514,7 +514,8 @@ def show_poi_comparison(poi_data, poi_index):
     
     # Comparison Questions Section
     st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
-    st.markdown('<p class="big-font"><b>Comparison Questions</b></p>', unsafe_allow_html=True)
+    st.subheader("Comparison Questions")
+    # st.markdown('<p class="big-font"><b>Comparison Questions</b></p>', unsafe_allow_html=True)
     with st.container():
         st.markdown('<p class="question-font">Which description did you find more engaging and appealing (captured your attention more)?</p>', unsafe_allow_html=True)
         engaging_preference = st.radio(
@@ -564,10 +565,10 @@ def show_poi_comparison(poi_data, poi_index):
     st.write("")
     st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
 
-    col1, col2, col3,col4,col5 = st.columns([1, 1, 1,1,1])
-    
+    col1, col2, col3,col4,col5 = st.columns([1, 1, 1, 1, 1])
+
     with col3:
-        st.markdown("""<span style='color: red;'>Please fill in all required fields to proceed</span>""", unsafe_allow_html=True)
+        st.markdown("""<span style='color: red;'>Please verify if all required fields are entered.</span>""", unsafe_allow_html=True)
         if st.button("Next" if poi_index < len(poi_data["pois"]) - 1 else "Finish"):
             # Save response
             response = {
@@ -613,7 +614,7 @@ def show_thank_you():
 # Set page config
 st.set_page_config(
     page_title="POI Survey Application",
-    page_icon="🏰",
+    page_icon=None,
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -760,9 +761,10 @@ def main():
     
     Also manages session state and navigation between pages.
     """
+    st.logo("logo/fraunhofer_logo.png",size="large", link=None, icon_image=None)
     if st.session_state.page == 0:
         st.title("Welcome to the POI Survey")
-        st.write("Please provide some information about yourself to get personalized POI descriptions.")
+        st.write("Please provide information about yourself to get POI descriptions.")
         
         if show_user_details_form():
             # Load POI data
@@ -771,14 +773,14 @@ def main():
                 return
             
             # Show a message before starting content generation
-            st.info("Thank you for providing your details! We'll now generate personalized content for your survey...")
+            st.info("Thank you for providing your details! We'll now generate content for your survey...")
             
             # Generate personalized content
             st.session_state.ai_content = generate_all_poi_content(poi_data['pois'], st.session_state.user_data)
             
             # Move to first POI
             st.session_state.page = 1
-            st.experimental_rerun()
+            st.rerun()
     elif st.session_state.page == -1:
         show_thank_you()
     else:

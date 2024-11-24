@@ -595,7 +595,7 @@ def show_poi_comparison(poi_data, poi_index):
             else:
                 save_response()
                 st.session_state.page = -1
-            st.experimental_rerun()
+            st.rerun()
 
 # Thank you page
 def show_thank_you():
@@ -609,12 +609,12 @@ def show_thank_you():
         st.session_state.page = 0
         st.session_state.user_data = {}
         st.session_state.survey_responses = []
-        st.experimental_rerun()
+        st.rerun()
 
 # Set page config
 st.set_page_config(
     page_title="POI Survey Application",
-    page_icon=None,
+    page_icon="logo/icon.ico",
     layout="wide",
     initial_sidebar_state="collapsed"
 )

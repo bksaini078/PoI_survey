@@ -8,6 +8,7 @@ The application uses Streamlit for the UI and stores responses in CSV format.
 """
 
 import streamlit as st
+import streamlit.components.v1 as components
 import json
 from datetime import datetime
 import uuid
@@ -20,6 +21,7 @@ from dotenv import load_dotenv
 import time
 import base64
 import random
+import csv
 
 
 load_dotenv()
@@ -182,7 +184,11 @@ def generate_all_poi_content(pois, user_data):
     Returns:
         dict: Dictionary containing generated AI content for each POI
     """
-    temp_file = os.path.join('temp_data', f'temp_poi_content_{user_data["user_id"]}.json')
+    # Create temp_data directory if it doesn't exist
+    temp_dir = Path('temp_data')
+    temp_dir.mkdir(exist_ok=True)
+    
+    temp_file = temp_dir / f'temp_poi_content_{user_data["user_id"]}.json'
     
     # Show loading page with progress
     st.header("Generating Point of Interest Content")
@@ -586,12 +592,26 @@ def show_poi_comparison(poi_data, poi_index):
     )
     
     st.write("")
+    st.markdown("""<span style='color: red;'>Please verify if all required fields are entered.</span>""", unsafe_allow_html=True)
     st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
 
     col1, col2, col3,col4,col5 = st.columns([1, 1, 1, 1, 1])
 
     with col3:
-        st.markdown("""<span style='color: red;'>Please verify if all required fields are entered.</span>""", unsafe_allow_html=True)
+        # Add page numbers
+        st.markdown(f"""
+            <div style='
+                text-align: left;
+                padding: 10px;
+                margin-bottom: 10px;
+                color: #189c7d;
+                font-weight: bold;
+                font-size: 1.1em;
+            '>
+                Page {poi_index + 1} of {len(poi_data["pois"])}
+            </div>
+        """, unsafe_allow_html=True)
+        
         if st.button("Next" if poi_index < len(poi_data["pois"]) - 1 else "Finish", type="primary", use_container_width=False):
             # Save response
             response = {
@@ -613,7 +633,6 @@ def show_poi_comparison(poi_data, poi_index):
                 "timestamp": datetime.now().isoformat()
             }
             st.session_state.survey_responses.append(response)
-            
             if poi_index < len(poi_data["pois"]) - 1:
                 st.session_state.page += 1
             else:
@@ -624,16 +643,124 @@ def show_poi_comparison(poi_data, poi_index):
 # Thank you page
 def show_thank_you():
     """
-    Display thank you page after survey completion.
-    Shows appreciation message and confirms response recording.
+    Display thank you page with final survey questions and lottery entry.
+    Shows appreciation message and collects final feedback.
     """
-    st.title("Thank You!")
-    st.write("Your responses have been recorded. Thank you for participating in the survey!")
-    if st.button("Start New Survey", type="primary", use_container_width=False):
-        st.session_state.page = 0
-        st.session_state.user_data = {}
-        st.session_state.survey_responses = []
-        st.rerun()
+    st.title("Final Survey")
+    
+    # Overall Experience
+    st.subheader("Overall Experience")
+    st.write("How would you rate your overall experience with the POI descriptions provided in this study?")
+    overall_rating = st.radio(
+        "Overall Experience Rating (1 = Very Poor, 5 = Excellent)",
+        options=[1, 2, 3, 4, 5],
+        horizontal=True
+    )
+    comments = st.text_area("Comments (optional)", height=68)
+    
+    # Perception of Automated Adaptation
+    st.subheader("Perception of Automated Adaptation")
+    st.write("What is your opinion on the idea of automatically adapting POI descriptions based on user interests?")
+    adaptation_rating = st.radio(
+        "Adaptation Rating (1 = Very negative, 5 = Very positive)",
+        options=[1, 2, 3, 4, 5],
+        horizontal=True
+    )
+    
+    # Comfort with AI-Generated Content
+    st.subheader("Comfort with AI-Generated Content")
+    st.write("How comfortable are you with reading AI-generated descriptions when planning visits to new places?")
+    ai_comfort_rating = st.radio(
+        "AI Comfort Rating (1 = Not comfortable at all, 5 = Very comfortable)",
+        options=[1, 2, 3, 4, 5],
+        horizontal=True
+    )
+    
+    # Final Feedback
+    st.subheader("Final Feedback")
+    st.write("Do you have any additional comments or suggestions regarding the descriptions, the concept of adaptation, or your overall experience during the study?")
+    final_feedback = st.text_area("Additional Comments (Optional)", height=68)
+    
+    # Thank You Message and Email Collection
+    st.markdown("---")
+    st.title("Thank You for Your Participation!")
+    st.write("We greatly appreciate your time and effort in completing this study.")
+    st.write("As mentioned at the beginning, if you would like to enter the lottery for a chance to win a €25 Amazon voucher, please provide your contact email below:")
+    
+    email = st.text_input("Email")
+    
+    if st.button("Submit", type="primary"):
+        # Store the final survey responses
+        final_responses = {
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "overall_rating": overall_rating,
+            "comments": comments,
+            "adaptation_rating": adaptation_rating,
+            "ai_comfort_rating": ai_comfort_rating,
+            "final_feedback": final_feedback,
+            "lottery_email": email
+        }
+        
+        # Save responses to CSV
+        csv_filename = f"survey_results/final_responses_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        os.makedirs("survey_results", exist_ok=True)
+        
+        # Check if file exists to determine if we need to write headers
+        file_exists = os.path.isfile(csv_filename)
+        
+        with open(csv_filename, mode='a', newline='', encoding='utf-8') as file:
+            writer = csv.DictWriter(file, fieldnames=final_responses.keys())
+            if not file_exists:
+                writer.writeheader()
+            writer.writerow(final_responses)
+        
+        st.success("Thank you! Your responses have been recorded.")
+        
+        # Option to start a new survey
+        if st.button("Start New Survey"):
+            st.session_state.page = 0
+            st.session_state.user_data = {}
+            st.session_state.survey_responses = []
+            st.rerun()
+
+# Consent page
+def show_consent_page():
+    """
+    Display the consent page and handle user agreement.
+    
+    Returns:
+        bool: True if user agrees to consent, False otherwise
+    """
+    st.title("Research Study Consent Form")
+    
+    st.markdown("""
+    ### Purpose of the Study
+
+    The goal of this study is to see how well descriptions of tourist spots, called Points of Interest (POIs), 
+    can be customized to match people's preferences and interests. Your feedback will help us understand which 
+    methods work best for creating engaging and personalized descriptions. This study is being carried out in 
+    partnership with Fraunhofer IAO, Stuttgart, and KU Leuven, Belgium.
+
+    ### What you will do:
+
+    * Share some basic information about yourself, like your interests and background.
+    * Look at pairs of POI descriptions created using different methods and rate them based on how well they match your preferences.
+    * The entire process will take about 20-25 minutes.
+
+    Your participation in this study is entirely voluntary. As a token of appreciation, three participants will be 
+    randomly selected to receive a €25 Amazon voucher each.
+
+    All data collected will be kept confidential and used solely for research purposes. Your responses will be 
+    anonymized and will not be linked to your identity in any reports or publications.
+    """)
+
+    agree = st.button("Agree and Continue")
+    
+    if agree:
+        st.session_state.consent_given = True
+        return True
+    
+    return False
 
 # Set page config
 st.set_page_config(
@@ -642,6 +769,11 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed"
 )
+
+# Add imprint link in top right
+col1, col2 = st.columns([0.9, 0.1])
+with col2:
+    st.markdown('<div style="text-align: right;"><a href="https://www.iao.fraunhofer.de/de/impressum.html" target="_blank" style="color: #189c7d; text-decoration: none;">Imprint</a></div>', unsafe_allow_html=True)
 
 # Custom CSS for theme color and containers
 st.markdown("""
@@ -661,7 +793,8 @@ st.markdown("""
     
     div.stButton > button:hover {
         background-color: #147c63 !important;
-        border-color: #147c63 !important;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
     div.stButton > button:active {
@@ -796,7 +929,7 @@ st.markdown("""
 
 # Initialize session state variables
 if 'page' not in st.session_state:
-    st.session_state.page = 0
+    st.session_state.page = -2
 
 if 'user_data' not in st.session_state:
     st.session_state.user_data = {}
@@ -810,20 +943,33 @@ if 'survey_responses' not in st.session_state:
 if 'user_id' not in st.session_state:
     st.session_state.user_id = str(uuid.uuid4())
 
+if 'consent_given' not in st.session_state:
+    st.session_state.consent_given = False
+
 # Main app logic
 def main():
     """
     Main function to run the POI survey application.
     
     Handles the flow of the survey:
-    1. User details collection
-    2. POI comparisons
-    3. Thank you page
+    1. Consent page
+    2. User details collection
+    3. POI comparisons
+    4. Thank you page
     
     Also manages session state and navigation between pages.
     """
-    st.logo("logo/fraunhofer_logo.png",size="large", link=None, icon_image=None)
-    if st.session_state.page == 0:
+    st.image("logo/fraunhofer_logo.png", width=200)
+
+    if st.session_state.page == -2:
+        if show_consent_page():
+            st.session_state.page = 0
+            st.rerun()
+    elif st.session_state.page == 0:
+        if not st.session_state.consent_given:
+            st.session_state.page = -2
+            st.rerun()
+            
         st.title("Welcome to the POI Survey")
         st.write("Please provide information about yourself to get POI descriptions.")
         
@@ -845,10 +991,14 @@ def main():
     elif st.session_state.page == -1:
         show_thank_you()
     else:
+        if not st.session_state.consent_given:
+            st.session_state.page = -2
+            st.rerun()
+            
         poi_data = load_poi_data()
         if not poi_data:
             return
         show_poi_comparison(poi_data, st.session_state.page - 1)
-    
+
 if __name__ == "__main__":
     main()

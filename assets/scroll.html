@@ -1,0 +1,39 @@
+<![CDATA[<script>
+    function scrollToTop() {
+        try {
+            window.scrollTo(0, 0);
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            
+            // Target Streamlit's iframe
+            window.parent.scrollTo(0, 0);
+            window.parent.document.body.scrollTop = 0;
+            window.parent.document.documentElement.scrollTop = 0;
+            
+            // Target specific Streamlit elements
+            const elements = [
+                '.stApp',
+                '.main',
+                '.element-container',
+                '.block-container',
+                '[data-testid="stAppViewContainer"]'
+            ];
+            
+            elements.forEach(selector => {
+                const element = window.parent.document.querySelector(selector);
+                if (element) {
+                    element.scrollTop = 0;
+                }
+            });
+        } catch (e) {
+            console.error('Error in scrollToTop:', e);
+        }
+    }
+    
+    // Execute scroll on load
+    scrollToTop();
+    
+    // Execute again after a delay to ensure content is loaded
+    setTimeout(scrollToTop, 100);
+    setTimeout(scrollToTop, 500);
+</script>]]>

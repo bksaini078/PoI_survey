@@ -1,8 +1,14 @@
 streamlit
 pandas
-openai
 pydantic
+openai
 python-dotenv
-pillow==10.0.1
+Pillow
 uuid
 pathlib
+numpy
+requests
+python-dateutil
+pytz
+six
+typing-extensions

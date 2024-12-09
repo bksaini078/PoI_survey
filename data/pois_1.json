@@ -1,0 +1,22 @@
+{
+  "categories": [
+      {
+          "name": "Accommodation",
+          "color": "blue",
+          "pois": [
+              {
+                  "id": 6,
+                  "position": [
+                      48.7750,
+                      9.1830
+                  ],
+                  "title": "Mövenpick Hotel Stuttgart Airport",
+                  "description": "The Movenpick Hotel Stuttgart Airport in Germany is a superior hotel with direct access to the airport, the ICS International Congress Center Stuttgart, and the Messe Stuttgart. Discover a destination which gives you a perfect balance between business and leisure. Enjoy a day in Stuttgart's city center, easily accessible by car or public transportation within 20 minutes or relax in our fitness area.",
+                  "imagesrc": "assets/images/Mövenpick.png",
+                  "source": "https://www.tripadvisor.com/Hotel_Review-g187291-d647452-Reviews-Movenpick_Hotel_Stuttgart_Airport-Stuttgart_Baden_Wurttemberg.html"
+              }
+        ]
+    }
+]
+}
+    

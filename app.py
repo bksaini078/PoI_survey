@@ -653,6 +653,45 @@ def show_thank_you():
         st.session_state.survey_responses = []
         st.rerun()
 
+# Consent page
+def show_consent_page():
+    """
+    Display the consent page and handle user agreement.
+    
+    Returns:
+        bool: True if user agrees to consent, False otherwise
+    """
+    st.title("Research Study Consent Form")
+    
+    st.markdown("""
+    ### Purpose of the Study
+
+    The goal of this study is to see how well descriptions of tourist spots, called Points of Interest (POIs), 
+    can be customized to match people's preferences and interests. Your feedback will help us understand which 
+    methods work best for creating engaging and personalized descriptions. This study is being carried out in 
+    partnership with Fraunhofer IAO, Stuttgart, and KU Leuven, Belgium.
+
+    ### What you will do:
+
+    * Share some basic information about yourself, like your interests and background.
+    * Look at pairs of POI descriptions created using different methods and rate them based on how well they match your preferences.
+    * The entire process will take about 20-25 minutes.
+
+    Your participation in this study is entirely voluntary. As a token of appreciation, three participants will be 
+    randomly selected to receive a €25 Amazon voucher each.
+
+    All data collected will be kept confidential and used solely for research purposes. Your responses will be 
+    anonymized and will not be linked to your identity in any reports or publications.
+    """)
+
+    agree = st.button("Agree and Continue")
+    
+    if agree:
+        st.session_state.consent_given = True
+        return True
+    
+    return False
+
 # Set page config
 st.set_page_config(
     page_title="POI Survey Application",
@@ -820,7 +859,7 @@ st.markdown("""
 
 # Initialize session state variables
 if 'page' not in st.session_state:
-    st.session_state.page = 0
+    st.session_state.page = -2
 
 if 'user_data' not in st.session_state:
     st.session_state.user_data = {}
@@ -834,20 +873,33 @@ if 'survey_responses' not in st.session_state:
 if 'user_id' not in st.session_state:
     st.session_state.user_id = str(uuid.uuid4())
 
+if 'consent_given' not in st.session_state:
+    st.session_state.consent_given = False
+
 # Main app logic
 def main():
     """
     Main function to run the POI survey application.
     
     Handles the flow of the survey:
-    1. User details collection
-    2. POI comparisons
-    3. Thank you page
+    1. Consent page
+    2. User details collection
+    3. POI comparisons
+    4. Thank you page
     
     Also manages session state and navigation between pages.
     """
-    st.logo("logo/fraunhofer_logo.png",size="large", link=None, icon_image=None)
-    if st.session_state.page == 0:
+    st.image("logo/fraunhofer_logo.png", width=200)
+
+    if st.session_state.page == -2:
+        if show_consent_page():
+            st.session_state.page = 0
+            st.rerun()
+    elif st.session_state.page == 0:
+        if not st.session_state.consent_given:
+            st.session_state.page = -2
+            st.rerun()
+            
         st.title("Welcome to the POI Survey")
         st.write("Please provide information about yourself to get POI descriptions.")
         
@@ -869,10 +921,14 @@ def main():
     elif st.session_state.page == -1:
         show_thank_you()
     else:
+        if not st.session_state.consent_given:
+            st.session_state.page = -2
+            st.rerun()
+            
         poi_data = load_poi_data()
         if not poi_data:
             return
         show_poi_comparison(poi_data, st.session_state.page - 1)
-    
+
 if __name__ == "__main__":
     main()

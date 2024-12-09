@@ -661,6 +661,11 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+# Add imprint link in top right
+col1, col2 = st.columns([0.9, 0.1])
+with col2:
+    st.markdown('<div style="text-align: right;"><a href="https://www.iao.fraunhofer.de/de/impressum.html" target="_blank" style="color: #189c7d; text-decoration: none;">Imprint</a></div>', unsafe_allow_html=True)
+
 # Custom CSS for theme color and containers
 st.markdown("""
     <style>

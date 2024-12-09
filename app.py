@@ -21,6 +21,7 @@ from dotenv import load_dotenv
 import time
 import base64
 import random
+import csv
 
 
 load_dotenv()
@@ -642,16 +643,85 @@ def show_poi_comparison(poi_data, poi_index):
 # Thank you page
 def show_thank_you():
     """
-    Display thank you page after survey completion.
-    Shows appreciation message and confirms response recording.
+    Display thank you page with final survey questions and lottery entry.
+    Shows appreciation message and collects final feedback.
     """
-    st.title("Thank You!")
-    st.write("Your responses have been recorded. Thank you for participating in the survey!")
-    if st.button("Start New Survey", type="primary", use_container_width=False):
-        st.session_state.page = 0
-        st.session_state.user_data = {}
-        st.session_state.survey_responses = []
-        st.rerun()
+    st.title("Final Survey")
+    
+    # Overall Experience
+    st.subheader("Overall Experience")
+    st.write("How would you rate your overall experience with the POI descriptions provided in this study?")
+    overall_rating = st.radio(
+        "Overall Experience Rating (1 = Very Poor, 5 = Excellent)",
+        options=[1, 2, 3, 4, 5],
+        horizontal=True
+    )
+    comments = st.text_area("Comments (optional)", height=68)
+    
+    # Perception of Automated Adaptation
+    st.subheader("Perception of Automated Adaptation")
+    st.write("What is your opinion on the idea of automatically adapting POI descriptions based on user interests?")
+    adaptation_rating = st.radio(
+        "Adaptation Rating (1 = Very negative, 5 = Very positive)",
+        options=[1, 2, 3, 4, 5],
+        horizontal=True
+    )
+    
+    # Comfort with AI-Generated Content
+    st.subheader("Comfort with AI-Generated Content")
+    st.write("How comfortable are you with reading AI-generated descriptions when planning visits to new places?")
+    ai_comfort_rating = st.radio(
+        "AI Comfort Rating (1 = Not comfortable at all, 5 = Very comfortable)",
+        options=[1, 2, 3, 4, 5],
+        horizontal=True
+    )
+    
+    # Final Feedback
+    st.subheader("Final Feedback")
+    st.write("Do you have any additional comments or suggestions regarding the descriptions, the concept of adaptation, or your overall experience during the study?")
+    final_feedback = st.text_area("Additional Comments (Optional)", height=68)
+    
+    # Thank You Message and Email Collection
+    st.markdown("---")
+    st.title("Thank You for Your Participation!")
+    st.write("We greatly appreciate your time and effort in completing this study.")
+    st.write("As mentioned at the beginning, if you would like to enter the lottery for a chance to win a €25 Amazon voucher, please provide your contact email below:")
+    
+    email = st.text_input("Email")
+    
+    if st.button("Submit", type="primary"):
+        # Store the final survey responses
+        final_responses = {
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "overall_rating": overall_rating,
+            "comments": comments,
+            "adaptation_rating": adaptation_rating,
+            "ai_comfort_rating": ai_comfort_rating,
+            "final_feedback": final_feedback,
+            "lottery_email": email
+        }
+        
+        # Save responses to CSV
+        csv_filename = f"survey_results/final_responses_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        os.makedirs("survey_results", exist_ok=True)
+        
+        # Check if file exists to determine if we need to write headers
+        file_exists = os.path.isfile(csv_filename)
+        
+        with open(csv_filename, mode='a', newline='', encoding='utf-8') as file:
+            writer = csv.DictWriter(file, fieldnames=final_responses.keys())
+            if not file_exists:
+                writer.writeheader()
+            writer.writerow(final_responses)
+        
+        st.success("Thank you! Your responses have been recorded.")
+        
+        # Option to start a new survey
+        if st.button("Start New Survey"):
+            st.session_state.page = 0
+            st.session_state.user_data = {}
+            st.session_state.survey_responses = []
+            st.rerun()
 
 # Consent page
 def show_consent_page():

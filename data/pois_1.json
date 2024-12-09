@@ -14,29 +14,7 @@
                   "description": "The Movenpick Hotel Stuttgart Airport in Germany is a superior hotel with direct access to the airport, the ICS International Congress Center Stuttgart, and the Messe Stuttgart. Discover a destination which gives you a perfect balance between business and leisure. Enjoy a day in Stuttgart's city center, easily accessible by car or public transportation within 20 minutes or relax in our fitness area.",
                   "imagesrc": "assets/images/Mövenpick.png",
                   "source": "https://www.tripadvisor.com/Hotel_Review-g187291-d647452-Reviews-Movenpick_Hotel_Stuttgart_Airport-Stuttgart_Baden_Wurttemberg.html"
-              },
-              {
-                "id": 7,
-                "position": [
-                    48.7760,
-                    9.1840
-                ],
-                "title": "Mercure Hotel Stuttgart Sindelfingen an der Messe",
-                "description": "The 4 star Mercure Stuttgart Sindelfingen an der Messe offers 186 modern rooms. The hotel is ideally located on the A81, near the Sindelfingen Ost exit, within 5 km of major companies. The airport, the new Landesmesse exhibition centre and Stuttgart central railway station are all within easy reach between 11 and 15 km away. Enjoy our cosy wine bar and large breakfast room. Other facilities include seven meeting rooms, the largest hotel pool in Stuttgart and parking for 180 vehicles.",
-                "imagesrc": "assets/images/Mercure.png",
-                "source": "https://www.tripadvisor.com/Hotel_Review-g198391-d233899-Reviews-Mercure_Hotel_Stuttgart_Sindelfingen_an_der_Messe-Sindelfingen_Baden_Wurttemberg.html"
-            },
-            {
-                "id": 15,
-                "position": [
-                    48.7780,
-                    9.1860
-                ],
-                "title": "Hotel Europäischer Hof Heidelberg",
-                "description": "Guests quite simply expect more from an owner-managed hotel. More individuality. More heart. More personality. As one of few privately run 5 stars superior hotels, The Europäischer Hof frequently goes one better. Since 1865, guests from all over the world have enjoyed the unique flair of this hotel, which is located close to Frankfurt and Stuttgart. The name of our establishment stands for all that is best in European hotel culture and for exceptional standards of service. Official listings have rated the Europäischer Hof Heidelberg as the finest hotel in Heidelberg and in the Rhine-Neckar Metropolitan Region. The hotel is a Certified Business Hotel, Certified Conference Hotel, and certified as conforming to the pharma code. Accordingly, offers everything you expect of a professional business hotel.",
-                "imagesrc": "assets/images/HofHeidel.png",
-                "source": "https://www.tripadvisor.com/Hotel_Review-g187286-d201302-Reviews-Hotel_Europaischer_Hof_Heidelberg-Heidelberg_Baden_Wurttemberg.html"
-            }
+              }
         ]
     }
 ]

@@ -1,30 +1,24 @@
 {
   "categories": [
       {
-          "name": "Accommodation",
+          "name": "Accomodation",
           "color": "blue",
           "pois": [
-              {
-                  "id": 6,
-                  "position": [
-                      48.7750,
-                      9.1830
-                  ],
-                  "title": "Mövenpick Hotel Stuttgart Airport",
-                  "description": "The Movenpick Hotel Stuttgart Airport in Germany is a superior hotel with direct access to the airport, the ICS International Congress Center Stuttgart, and the Messe Stuttgart. Discover a destination which gives you a perfect balance between business and leisure. Enjoy a day in Stuttgart's city center, easily accessible by car or public transportation within 20 minutes or relax in our fitness area.",
-                  "imagesrc": "assets/images/Mövenpick.png",
-                  "source": "https://www.tripadvisor.com/Hotel_Review-g187291-d647452-Reviews-Movenpick_Hotel_Stuttgart_Airport-Stuttgart_Baden_Wurttemberg.html"
+            {
+                "id": 1,
+                "position": [41.9028, 12.4829],
+                "title": "Hotel Hassler Roma",
+                "description": "Hassler Roma is a legendary five-star luxury hotel atop the Spanish Steps, renowned for offering an unforgettable experience in Rome's historic heart. Just minutes from landmarks like the Pantheon, St. Peter's Basilica, the Colosseum, and Trevi Fountain, it boasts 87 elegant rooms and suites. Owned by Roberto E. Wirth, a fifth-generation Swiss hotelier, the Hassler features exceptional dining, including the Michelin-starred Imàgo, Salone Eva, Palm Court, and the nearby Il Palazzetto Wine Bar. Known for its elegance, style, and impeccable service, the Hassler Roma epitomizes international luxury hospitality.",
+                "imagesrc": "./assets/images/Hassler_Roma.png",
+                "source": "https://www.tripadvisor.in/Hotel_Review-g187791-d191332-Reviews-Hotel_Hassler-Rome_Lazio.html"
               },
               {
-                  "id": 16,
-                  "position": [
-                      48.7790,
-                      9.1870
-                  ],
-                  "title": "Pullman Stuttgart Fontana",
-                  "description": "The Pullman Stuttgart Fontana is located directly at the Vaihingen train station and has direct access to the A8 motorway. The New Trade Fair, Stuttgart Airport and Stuttgart city center with the main train station can be reached as quickly as the musical theater. The hotel has its own underground car park with 110 parking spaces and direct access to the hotel lobby. Our 252 hotel rooms offer all the amenities of a 4 star superior hotel. The 1200 m² Fit & Spa Lounge with pool, sauna, sanarium, whirlpool and a sun terrace invites you to relax and unwind. For business lunch or dinner, visit our restaurant with outdoor terrace and enjoy regional and international food. The vibrant centerpiece of the hotel is the Fontana Bar. Indulge in fine wines, draft beer and international cocktails, as well as hot and cold snacks such as the classic Caesar salad or our Pullman burger.",
-                  "imagesrc": "assets/images/Pullmann.png",
-                  "source": "https://www.tripadvisor.com/Hotel_Review-g187291-d202429-Reviews-Pullman_Stuttgart_Fontana-Stuttgart_Baden_Wurttemberg.html"
+                "id": 2,
+                "position": [51.5079, -0.1419],
+                "title": "The Savoy",
+                "description": "The Savoy is the only luxury hotel on the River Thames. The ballet, opera, and theatre of vibrant Covent Garden are just steps away, with the City, world-renowned museums and galleries, and the designer shopping of Knightsbridge and Mayfair within easy reach. The Savoy has been woven into the fabric of London for almost 130 years, with exceptional service and memorable experiences at the heart of everything. Our team work hard to prepare for our guests and have implemented a range of measures to look after your well-being, but one thing remains a constant – the warmth of our Savoy welcome.",
+                "imagesrc": "./assets/images/savoylondon.png",
+                "source": "https://www.thesavoylondon.com/"
               }
           ]
       },
@@ -32,27 +26,21 @@
           "name": "Natural Attractions",
           "color": "green",
           "pois": [
-              {
-                  "id": 8,
-                  "position": [
-                      48.7790,
-                      9.1800
-                  ],
-                  "title": "Wilhelma - zoo and botanical garden",
-                  "description": "More than one million visitors are attracted to Wihelma every year. The diversity of animals and plants is remarkable. And not only that: the flair of “1001 Nights” also makes the zoo something special. When King Wilhelm I had the idea of building a bathhouse below Rosenstein Palace at the beginning of the 19th century, Wilhelma was born. The plan for the bathhouse quickly grew into a pleasure garden with pavilions, walkways, lakes and a banqueting hall. Everything was designed in the Moorish style, bringing a touch of “1001 Nights” to the Neckar. After the end of the monarchy, the royal pleasure garden was opened to the public as a botanical garden. However, the zoological history of Wilhelma only began after the Second World War with an aquarium show in 1949. Further exhibitions with living exhibits followed and after each show the wild animals remained at Wilhelma.",
-                  "imagesrc": "assets/images/Wilhelma.png",
-                  "source": "https://www.stuttgart.de/tourismus/sehenswuerdigkeiten/zoo-wilhelma.php"
+            {
+                "id": 3,
+                "position": [46.5777, 7.9906],
+                "title": "Jungfraujoch - Top of Europe",
+                "description": "Located in the heart of the Swiss Alps, Jungfraujoch is a breathtaking destination known as the 'Top of Europe.' Visitors can enjoy panoramic views of the Aletsch Glacier, Europe's longest glacier, and partake in activities such as snow tubing, ice palace tours, and scenic walks. Accessible by a historic cogwheel train, this spot is a must-visit for nature lovers and adventure seekers.",
+                "imagesrc": "./assets/images/jungfrau.png",
+                "source": "https://www.jungfrau.ch/"
               },
               {
-                  "id": 18,
-                  "position": [
-                      48.7820,
-                      9.1770
-                  ],
-                  "title": "Stuttgart Forest",
-                  "description": "The forest has a very high value in Stuttgart. It provides space for many animals and plants and makes a significant contribution to relieving the ecosystem. For the people of Stuttgart, the forest offers above all the opportunity to relax and unwind in nature. The forest is Stuttgart’s largest recreational area and covers 5,000 hectares, or 24 percent of the city. 56 percent (2,700 hectares) of this is also owned by the city of Stuttgart. The second largest forest owner in Stuttgart is the state of Baden-Württemberg with its forestry company ForstBW. The majority of these areas are managed by the  Schönbuch forest district.",
-                  "imagesrc": "assets/images/Forest.png",
-                  "source": "https://www.stuttgart.de/leben/natur/wald/"
+                "id": 4,
+                "position": [47.5576, 10.7498],
+                "title": "Neuschwanstein Castle",
+                "description": "Visiting the magical Neuschwanstein Castle in Bavaria by train makes it an even more unforgettable experience. On this tour, relax on the journey from Munich to Füssen, where you have the option to walk up to the castle or ride to the castle by horse-drawn carriage. Save valuable vacation time with skip-the-line entry and learn more about the complex's fascinating history with an included guided tour. Note: The bus ride replaces the train during certain months.",
+                "imagesrc": "./assets/images/neuschwanstein.png",
+                "source": "https://www.neuschwanstein.de/englisch/"
               }
           ]
       },
@@ -60,19 +48,16 @@
           "name": "Entertainment",
           "color": "red",
           "pois": [
-              {
-                  "id": 10,
-                  "position": [
-                      48.7710,
-                      9.1810
-                  ],
-                  "title": "Stuttgarter Weihnachtsmarkt",
-                  "description": "For nearly a month leading up to Christmas, the Stuttgarter Weihnachtsmarkt welcomes over 3 million visitors to shop for wood toys, figurines, and antiques and warm their bellies with mulled wine and fresh gingerbread. Little ones scoot about Children's Fairyland, riding the steam train, designing their own candles, and snacking on chocolate-covered fruit. The market's nativity scene features live lambs, sheep, donkeys, and a goat, and crowds gather for daily concerts performed by choirs and music groups from the Stuttgart region. A tradition dating back over 300 years, the Stuttgarter Weihnachtsmarkt stands as one of Europe's oldest and most lively Christmas markets.",
-                  "imagesrc": "assets/images/Weihnachtsmarkt.png",
-                  "source": "https://www.tripadvisor.com/Attraction_Review-g187291-d8820363-Reviews-Stuttgarter_Weihnachtsmarkt-Stuttgart_Baden_Wurttemberg.html"
+            {
+                "id": 5,
+                "position": [50.9406, 6.9599],
+                "title": "Cologne Carnival",
+                "description": "The Cologne Carnival, held annually in February, is one of Germany's largest and most vibrant festivals. Known as the 'fifth season,' it features parades, costumes, and lively street parties. The highlight is Rose Monday, when colorful floats fill the streets. It’s a unique cultural experience celebrating joy and tradition.",
+                "imagesrc": "./assets/images/colone_carnival.png",
+                "source": "https://www.cologne.de/"
               },
               {
-                  "id": 11,
+                  "id": 6,
                   "position": [
                       48.7720,
                       9.1820
@@ -88,27 +73,21 @@
           "name": "Cultural and Historical Sites",
           "color": "orange",
           "pois": [
-              {
-                  "id": 4,
-                  "position": [
-                      48.7741,
-                      9.1798
-                  ],
-                  "title": "Stuttgart Palace Square",
-                  "description": "The Schlossplatz is a green gem in the heart of Stuttgart - and is located directly on the shopping mile Königstraße. Tourists and locals alike like to take a break and enjoy the Mediterranean atmosphere. With its rows of trees, fountains and fields of flowers, Schlossplatz is today considered one of the most beautiful squares in Europe. This was not always the case in the past. At the beginning of the 19th century, Schlossplatz was just a parade and drill ground. It was not until the 1860s that the dusty area was transformed into a blooming flower garden. The baroque garden with its intersecting paths and colorful flowers is a real jewel. There are the beautiful fountains, erected in honor of King William I in 1863, in which many a city dweller cools off on a hot day. There is the cast-iron bandstand with Moorish decorated arches, where military bands played every Sunday for many years.",
-                  "imagesrc": "assets/images/Schlossplatz.png",
-                  "source": "https://www.stuttgart.de/tourismus/sehenswuerdigkeiten/schlossplatz.php?form=translationDisclaimer-MTMzMDAwMjQ5&action=submit#translationDisclaimer-MTMzMDAwMjQ5"
+            {
+                "id": 7,
+                "position": [41.8902, 12.4922],
+                "title": "Colosseum",
+                "description": "The Colosseum is an iconic symbol of ancient Rome, built in 80 AD to host gladiatorial games and public spectacles. This massive amphitheater could hold up to 50,000 spectators, showcasing the engineering marvels of its time. Visitors can explore its grand arena, underground passages, and upper tiers, gaining insight into Roman society and architecture. The site also offers panoramic views of the nearby Roman Forum and Palatine Hill, making it a central hub for understanding Rome’s ancient heritage. With its well-preserved structure and rich history, the Colosseum remains one of Italy’s most visited landmarks.",
+                "imagesrc": "./assets/images/colosseo.png",
+                "source": "https://www.coopculture.it/en/colosseo-e-shop.cfm"
               },
               {
-                  "id": 23,
-                  "position": [
-                      48.7760,
-                      9.1800
-                  ],
-                  "title": "Mercedes-Benz Museum",
-                  "description": "The Museum celebrates the automobile invented by Carl Benz in 1886: it relates its history and tells its stories, bringing both alive by placing them in the context of technology, day-to-day life, social history and popular culture. More than 160 vehicles of all types are the main protagonists. They range from some of the oldest automobiles ever built to legendary racing cars and futuristic research vehicles. Together with other exhibits, they form the centrepiece of the permanent exhibition covering a total of 16,500 square metres in twelve rooms. This unparalleled world can be discovered on two tours that follow a 'Legend' and 'Collection' narrative.",
-                  "imagesrc": "assets/images/Mercedes.png",
-                  "source": "https://www.tripadvisor.com/Attraction_Review-g187291-d243381-Reviews-Mercedes_Benz_Museum-Stuttgart_Baden_Wurttemberg.html"
+                "id": 8,
+                "position": [48.8606, 2.3376],
+                "title": "Louvre Museum",
+                "description": "The Louvre Museum in Paris is the world's largest art museum and a historic monument. Once a royal palace, it houses over 35,000 artworks, including the renowned Mona Lisa and the Venus de Milo. Its iconic glass pyramid entrance is a modern architectural masterpiece. Visitors can explore collections spanning from ancient civilizations to the 19th century, immersing themselves in the beauty of global art history. With its diverse exhibits and captivating ambiance, the Louvre offers an unforgettable cultural experience.",
+                "imagesrc": "./assets/images/louvre.png",
+                "source": "https://www.louvre.fr/en"
               }
           ]
       },
@@ -117,27 +96,21 @@
           "color": "teal",
           "pois": [
               {
-                  "id": 12,
-                  "position": [
-                      48.7730,
-                      9.1835
-                  ],
-                  "title": "Konigsbau Passagen",
-                  "description": "Planning a trip to Stuttgart? Enjoy an incredible shopping experience – welcome to the Königsbau Passagen! International brands, top-quality beauty products, extraordinary accessories, over 30 culinary highlights and excellent service, all under one roof. For a wonderful shopping day with the whole family!",
-                  "imagesrc": "assets/images/Königsbau.png",
-                  "source": "https://www.tripadvisor.com/Attraction_Review-g187291-d5798646-Reviews-Konigsbau_Passagen-Stuttgart_Baden_Wurttemberg.html"
-              },
-              {
-                  "id": 13,
-                  "position": [
-                      48.7740,
-                      9.1845
-                  ],
-                  "title": "Rotenberger Weingaertle",
-                  "description": "Cosy restaurant offering local and typically Swabian cuisine. Located in one of the most scenic locations around Stuttgart, only 5 minutes walking distance to the popular tourist hotspot Grabkapelle auf dem Württemberg.",
-                  "imagesrc": "assets/images/Graka.png",
-                  "source": "https://www.tripadvisor.com/Restaurant_Review-g187291-d1342000-Reviews-Rotenberger_Weingaertle-Stuttgart_Baden_Wurttemberg.html"
-              }
+          "id": 9,
+          "position": [41.9038, 12.4820],
+          "title": "Via del Corso",
+          "description": "Via del Corso, a lively 1.5-kilometer shopping street in Rome, connects Piazza Venezia to Piazza del Popolo and caters to all budgets, from luxury brands to affordable stores. Part of the historic 'Trident' from the 15th to 17th centuries, it links Porta del Popolo to major basilicas like St. Peter's. Nearby, high-fashion streets like Via dei Condotti and Via Borgognona feature exclusive brands and chic boutiques, making Via del Corso a must-visit for shopping and Roman culture.",
+          "imagesrc": "./assets/images/via_del_corso.png",
+          "source": "https://www.turismoroma.it/en"
+        },
+        {
+            "id": 10,
+            "position": [48.2027, 16.3684],
+            "title": "Café Central, Vienna",
+            "description": "Café Central, located in the heart of Vienna, is a legendary coffee house that has been a cornerstone of the city’s cultural and intellectual life since 1876. Housed in the stunning Palais Ferstel, its grand interior features soaring ceilings, elegant chandeliers, and marble pillars that exude old-world charm. Over the decades, Café Central became a meeting place for prominent thinkers, writers, and politicians, including Sigmund Freud, Leon Trotsky, and Stefan Zweig, earning it the nickname 'the living room of Vienna.' Today, it continues to enchant visitors with its timeless ambiance and dedication to Viennese coffeehouse traditions.",
+            "imagesrc": "./assets/images/Cafe-Central.png",
+            "source": "https://www.cafecentral.wien/"
+          }
           ]
       }
   ]

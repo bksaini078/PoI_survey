@@ -327,8 +327,34 @@ def _show_navigation_buttons(poi_data: Dict, poi_index: int, poi: Dict, is_manua
         if st.button("Next" if poi_index < len(poi_data["pois"]) - 1 else "Finish", type="primary"):
             _handle_navigation(poi_data, poi_index, poi, is_manual_first)
 
+def _validate_responses(poi_index: int) -> bool:
+    """Helper function to validate that all questions have been answered."""
+    fields_to_check = [
+        f"manual_significance_{poi_index}",
+        f"manual_trust_{poi_index}",
+        f"manual_clarity_{poi_index}",
+        f"ai_significance_{poi_index}",
+        f"ai_trust_{poi_index}",
+        f"ai_clarity_{poi_index}",
+        f"engaging_{poi_index}",
+        f"relevant_{poi_index}",
+        f"eager_{poi_index}",
+        f"title_{poi_index}",
+        f"description_{poi_index}"
+    ]
+    
+    for field in fields_to_check:
+        if st.session_state[field] == "No Selection":
+            return False
+    return True
+
 def _handle_navigation(poi_data: Dict, poi_index: int, poi: Dict, is_manual_first: bool) -> None:
     """Helper function to handle navigation logic and response saving."""
+    # Validate all questions have been answered
+    if not _validate_responses(poi_index):
+        st.error("Please provide feedback for all questions before proceeding.")
+        return
+    
     response = {
         **st.session_state.user_data,
         "poi_id": poi["id"],

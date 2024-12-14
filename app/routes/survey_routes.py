@@ -206,12 +206,14 @@ def _show_assessment_section(label: str, poi_index: int) -> None:
             '<p class="question-font">Does the description effectively communicate the significance and offerings of the place?</p>',
             unsafe_allow_html=True
         )
+        options = ["No Selection"] + list(RATING_SCALE)
         st.radio(
             "Significance",
-            options=RATING_SCALE,
+            options=options,
             key=f"{'manual' if label == 'A' else 'ai'}_significance_{poi_index}",
             horizontal=True,
-            label_visibility="collapsed"
+            label_visibility="collapsed",
+            index=0  # Set "No Selection" as default
         )
     
     with st.container():
@@ -219,12 +221,14 @@ def _show_assessment_section(label: str, poi_index: int) -> None:
             '<p class="question-font">How trustworthy does this description appear to be?</p>',
             unsafe_allow_html=True
         )
+        options = ["No Selection"] + list(TRUST_SCALE)
         st.radio(
             "Trust",
-            options=TRUST_SCALE,
+            options=options,
             key=f"{'manual' if label == 'A' else 'ai'}_trust_{poi_index}",
             horizontal=True,
-            label_visibility="collapsed"
+            label_visibility="collapsed",
+            index=0  # Set "No Selection" as default
         )
     
     with st.container():
@@ -232,12 +236,14 @@ def _show_assessment_section(label: str, poi_index: int) -> None:
             '<p class="question-font">How clear and complete is the information provided?</p>',
             unsafe_allow_html=True
         )
+        options = ["No Selection"] + list(CLARITY_SCALE)
         st.radio(
             "Clarity",
-            options=CLARITY_SCALE,
+            options=options,
             key=f"{'manual' if label == 'A' else 'ai'}_clarity_{poi_index}",
             horizontal=True,
-            label_visibility="collapsed"
+            label_visibility="collapsed",
+            index=0  # Set "No Selection" as default
         )
 
 def _show_assessment_forms(poi_index: int) -> None:
@@ -249,50 +255,55 @@ def _show_assessment_forms(poi_index: int) -> None:
     st.markdown('<p class="question-font">Which description was more engaging?</p>', unsafe_allow_html=True)
     st.radio(
         "Engaging",
-        options=["A", "B", "Both equally"],
+        options=["No Selection", "A", "B", "Both equally"],
         key=f"engaging_{poi_index}",
         horizontal=True,
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        index=0  # Set "No Selection" as default
     )
     
     # More relevant description
     st.markdown('<p class="question-font">Which description provided more relevant information?</p>', unsafe_allow_html=True)
     st.radio(
         "Relevant",
-        options=["A", "B", "Both equally"],
+        options=["No Selection", "A", "B", "Both equally"],
         key=f"relevant_{poi_index}",
         horizontal=True,
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        index=0  # Set "No Selection" as default
     )
     
     # More eager to visit
     st.markdown('<p class="question-font">Based on which description would you be more eager to visit this place?</p>', unsafe_allow_html=True)
     st.radio(
         "Eager",
-        options=["A", "B", "Both equally"],
+        options=["No Selection", "A", "B", "Both equally"],
         key=f"eager_{poi_index}",
         horizontal=True,
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        index=0  # Set "No Selection" as default
     )
     
     # Better title
     st.markdown('<p class="question-font">Which title was more appealing?</p>', unsafe_allow_html=True)
     st.radio(
         "Title",
-        options=["A", "B", "Both equally"],
+        options=["No Selection", "A", "B", "Both equally"],
         key=f"title_{poi_index}",
         horizontal=True,
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        index=0  # Set "No Selection" as default
     )
     
     # Better description
     st.markdown('<p class="question-font">Overall, which description was better?</p>', unsafe_allow_html=True)
     st.radio(
         "Description",
-        options=["A", "B", "Both equally"],
+        options=["No Selection", "A", "B", "Both equally"],
         key=f"description_{poi_index}",
         horizontal=True,
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        index=0  # Set "No Selection" as default
     )
 
 def _show_navigation_buttons(poi_data: Dict, poi_index: int, poi: Dict, is_manual_first: bool) -> None:
@@ -356,8 +367,9 @@ def show_thank_you() -> None:
     st.write("How would you rate your overall experience with the POI descriptions provided in this study?")
     overall_rating = st.radio(
         "Overall Experience Rating (1 = Very Poor, 5 = Excellent)",
-        options=[1, 2, 3, 4, 5],
-        horizontal=True
+        options=["No Selection", 1, 2, 3, 4, 5],
+        horizontal=True,
+        index=0  # Set "No Selection" as default
     )
     comments = st.text_area("Comments (optional)", height=68)
     
@@ -366,8 +378,9 @@ def show_thank_you() -> None:
     st.write("What is your opinion on the idea of automatically adapting POI descriptions based on user interests?")
     adaptation_rating = st.radio(
         "Adaptation Rating (1 = Very negative, 5 = Very positive)",
-        options=[1, 2, 3, 4, 5],
-        horizontal=True
+        options=["No Selection", 1, 2, 3, 4, 5],
+        horizontal=True,
+        index=0  # Set "No Selection" as default
     )
     
     # Comfort with AI-Generated Content
@@ -375,8 +388,9 @@ def show_thank_you() -> None:
     st.write("How comfortable are you with reading AI-generated descriptions when planning visits to new places?")
     ai_comfort_rating = st.radio(
         "AI Comfort Rating (1 = Not comfortable at all, 5 = Very comfortable)",
-        options=[1, 2, 3, 4, 5],
-        horizontal=True
+        options=["No Selection", 1, 2, 3, 4, 5],
+        horizontal=True,
+        index=0  # Set "No Selection" as default
     )
     
     # Final Feedback
@@ -393,12 +407,13 @@ def show_thank_you() -> None:
     email = st.text_input("Email")
     
     if st.button("Submit", type="primary"):
+        # Convert "No Selection" to None for rating fields
         final_response = FinalSurveyResponse(
             timestamp=datetime.now(),
-            overall_rating=overall_rating,
+            overall_rating=None if overall_rating == "No Selection" else overall_rating,
             comments=comments,
-            adaptation_rating=adaptation_rating,
-            ai_comfort_rating=ai_comfort_rating,
+            adaptation_rating=None if adaptation_rating == "No Selection" else adaptation_rating,
+            ai_comfort_rating=None if ai_comfort_rating == "No Selection" else ai_comfort_rating,
             final_feedback=final_feedback,
             lottery_email=email
         )

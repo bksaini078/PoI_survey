@@ -47,10 +47,10 @@ class SurveyResponse(BaseModel):
 class FinalSurveyResponse(BaseModel):
     """Model for final survey feedback."""
     timestamp: datetime
-    overall_rating: int
+    overall_rating: Optional[int]
     comments: Optional[str]
-    adaptation_rating: int
-    ai_comfort_rating: int
+    adaptation_rating: Optional[int]
+    ai_comfort_rating: Optional[int]
     final_feedback: Optional[str]
     lottery_email: Optional[str]
 

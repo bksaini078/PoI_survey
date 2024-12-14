@@ -279,13 +279,25 @@ def _show_assessment_section(label: str, poi_index: int) -> None:
 def _show_assessment_forms(poi_index: int) -> None:
     """Helper function to display comparative assessment forms."""
     st.markdown("---")
+    st.subheader("General Question")
+    st.markdown('<p class="question-font">Have you ever visited this place??</p>', unsafe_allow_html=True)
+    st.radio(
+        "Visited",
+        options=["No Selection", "Yes", "No", "Prefer not to answer"],
+        key=f"isvisited_{poi_index}",
+        horizontal=True,
+        label_visibility="collapsed",
+        index=0  # Set "No Selection" as default
+    )
+
+    st.markdown("---")
     st.subheader("Comparative Assessment")
     
     # More engaging description
     st.markdown('<p class="question-font">Which description was more engaging?</p>', unsafe_allow_html=True)
     st.radio(
         "Engaging",
-        options=["No Selection", "A", "B", "Both equally"],
+        options=["No Selection", "Version A", "Version B", "Both equally"],
         key=f"engaging_{poi_index}",
         horizontal=True,
         label_visibility="collapsed",
@@ -296,7 +308,7 @@ def _show_assessment_forms(poi_index: int) -> None:
     st.markdown('<p class="question-font">Which description provided more relevant information?</p>', unsafe_allow_html=True)
     st.radio(
         "Relevant",
-        options=["No Selection", "A", "B", "Both equally"],
+        options=["No Selection", "Version A", "Version B", "Both equally"],
         key=f"relevant_{poi_index}",
         horizontal=True,
         label_visibility="collapsed",
@@ -307,7 +319,7 @@ def _show_assessment_forms(poi_index: int) -> None:
     st.markdown('<p class="question-font">Based on which description would you be more eager to visit this place?</p>', unsafe_allow_html=True)
     st.radio(
         "Eager",
-        options=["No Selection", "A", "B", "Both equally"],
+        options=["No Selection", "Version A", "Version B", "Both equally"],
         key=f"eager_{poi_index}",
         horizontal=True,
         label_visibility="collapsed",
@@ -318,7 +330,7 @@ def _show_assessment_forms(poi_index: int) -> None:
     st.markdown('<p class="question-font">Which title was more appealing?</p>', unsafe_allow_html=True)
     st.radio(
         "Title",
-        options=["No Selection", "A", "B", "Both equally"],
+        options=["No Selection", "Version A", "Version B", "Both equally"],
         key=f"title_{poi_index}",
         horizontal=True,
         label_visibility="collapsed",
@@ -329,7 +341,7 @@ def _show_assessment_forms(poi_index: int) -> None:
     st.markdown('<p class="question-font">Overall, which description was better?</p>', unsafe_allow_html=True)
     st.radio(
         "Description",
-        options=["No Selection", "A", "B", "Both equally"],
+        options=["No Selection", "Version A", "Version B", "Both equally"],
         key=f"description_{poi_index}",
         horizontal=True,
         label_visibility="collapsed",
@@ -370,7 +382,8 @@ def _validate_responses(poi_index: int) -> bool:
         f"relevant_{poi_index}",
         f"eager_{poi_index}",
         f"title_{poi_index}",
-        f"description_{poi_index}"
+        f"description_{poi_index}",
+        f"isvisited_{poi_index}"
     ]
     
     for field in fields_to_check:
@@ -401,6 +414,7 @@ def _handle_navigation(poi_data: Dict, poi_index: int, poi: Dict, is_manual_firs
         "eager_preference": st.session_state[f"eager_{poi_index}"],
         "title_preference": st.session_state[f"title_{poi_index}"],
         "description_preference": st.session_state[f"description_{poi_index}"],
+        "already_visited":st.session_state[f"isvisited_{poi_index}"],
         "timestamp": datetime.now().isoformat()
     }
     

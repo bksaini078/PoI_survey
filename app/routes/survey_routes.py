@@ -34,9 +34,9 @@ def show_consent_page() -> bool:
 
     ### What you will do:
 
-    * Share some basic information about yourself, like your interests and background.
-    * Look at pairs of POI descriptions created using different methods and rate them based on how well they match your preferences.
-    * The entire process will take about 20-25 minutes.
+    * Share some basic information about yourself, such as your interests and background.
+    * For each POI (tourist spot), you will see two versions, A and B, of descriptions created using different methods. Rate how well each version aligns with your preferences.
+    * The entire process will take about 20-30 minutes, including a few seconds for loading each page.
 
     Your participation in this study is entirely voluntary. As a token of appreciation, three participants will be 
     randomly selected to receive a €25 Amazon voucher each.
@@ -68,7 +68,8 @@ def show_user_details_form() -> bool:
             age = st.number_input("Age", min_value=0, max_value=120, value=25)
             has_children = st.selectbox("Do you have children?", YES_NO_OPTIONS)
             nationality = st.selectbox("Nationality", NATIONALITIES)
-            livein_city = st.text_input(label="Current City")
+            # st.markdown("**Current City** :red[*]")  # Required field indicator
+            livein_city = st.text_input(label="Current City*", label_visibility="visible")
         
         with col2:
             gender = st.selectbox("Gender", GENDER_OPTIONS)
@@ -96,11 +97,14 @@ def show_user_details_form() -> bool:
         col5, col6 = st.columns(2)
         
         with col5:
-            hobbies = st.multiselect("Hobbies", HOBBIES)
-            preferred_travel_style = st.multiselect("Preferred Travel Style", TRAVEL_STYLES)
+            # st.markdown("**Hobbies** :red[*] (Select at least 3)")
+            hobbies = st.multiselect("Hobbies* (Select at least 3)", HOBBIES, label_visibility="visible")
+            # st.markdown("**Preferred Travel Style** :red[*] (Select at least 3)")
+            preferred_travel_style = st.multiselect("Preferred Travel Style* (Select at least 3)", TRAVEL_STYLES, label_visibility="visible")
         
         with col6:
-            interests = st.multiselect("Travel Interests", TRAVEL_INTERESTS)
+            # st.markdown("**Travel Interests** :red[*] (Select at least 3)")
+            interests = st.multiselect("Travel Interests* (Select at least 3)", TRAVEL_INTERESTS, label_visibility="visible")
             travel_experience = st.radio(
                 "Travel Experience Level",
                 options=TRAVEL_EXPERIENCE_LEVELS,
@@ -108,12 +112,38 @@ def show_user_details_form() -> bool:
             )
         
         st.markdown(
-            """<span style='color: red;'>Please verify if you have filled all required fields before you click submit button</span>""",
+            """
+            <div style='color: red; font-size: 0.8em; margin-bottom: 10px;'>
+                * Required fields (minimum 3 selections for Hobbies, Travel Style, and Travel Interests)
+            </div>
+            """,
             unsafe_allow_html=True
         )
         submit_button = st.form_submit_button("Submit")
         
         if submit_button:
+            # Validate required fields
+            validation_errors = []
+            
+            if not livein_city.strip():
+                validation_errors.append("Current City is required")
+            
+            if len(hobbies) < 3:
+                validation_errors.append("Please select at least 3 hobbies")
+                
+            if len(preferred_travel_style) < 3:
+                validation_errors.append("Please select at least 3 Preferred Travel Styles")
+                
+            if len(interests) < 3:
+                validation_errors.append("Please select at least 3 Travel Interests")
+            
+            # Display validation errors if any
+            if validation_errors:
+                error_message = "Please correct the following errors:\n" + "\n".join(f"- {error}" for error in validation_errors)
+                st.error(error_message)
+                return False
+            
+            # If validation passes, save the data
             st.session_state.user_data = {
                 'user_id': st.session_state.user_id,
                 'age': age,
@@ -121,7 +151,7 @@ def show_user_details_form() -> bool:
                 'marital_status': marital_status,
                 'has_children': has_children,
                 'nationality': nationality,
-                'city':livein_city,
+                'city': livein_city,
                 'disability': disability,
                 'pets': pets,
                 'profession': profession,
@@ -178,7 +208,7 @@ def _show_poi_descriptions(description_a: Dict, description_b: Dict, poi_index: 
     
     for col, desc, label in [(col1, description_a, "A"), (col2, description_b, "B")]:
         with col:
-            st.subheader(f"POI {label}")
+            st.subheader(f"Version {label}")
             st.markdown(f"""
                 <div style="
                     border: 1px solid #189c7d; 
@@ -426,7 +456,7 @@ def show_thank_you() -> None:
     
     # Thank You Message and Email Collection
     st.markdown("---")
-    st.title("Thank You for Your Participation!")
+    st.subheader("Thank You for Your Participation!")
     st.write("We greatly appreciate your time and effort in completing this study.")
     st.write("As mentioned at the beginning, if you would like to enter the lottery for a chance to win a €25 Amazon voucher, please provide your contact email below:")
     
@@ -445,10 +475,10 @@ def show_thank_you() -> None:
         )
         
         SurveyResponseService.save_final_response(final_response)
-        st.success("Thank you! Your responses have been recorded.")
+        st.success("Thank you! Your responses have been saved. You may now close this survey.")
         
-        if st.button("Start New Survey"):
-            st.session_state.page = 0
-            st.session_state.user_data = {}
-            st.session_state.survey_responses = []
-            st.rerun()
+        # if st.button("Start New Survey"):
+        #     st.session_state.page = 0
+        #     st.session_state.user_data = {}
+        #     st.session_state.survey_responses = []
+        #     st.rerun()

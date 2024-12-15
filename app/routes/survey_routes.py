@@ -244,7 +244,7 @@ def _show_poi_descriptions(description_a: Dict, description_b: Dict, poi_index: 
 
 def _show_assessment_section(label: str, poi_index: int) -> None:
     """Helper function to display assessment section for a POI description."""
-    st.subheader(f"Assessment for POI {label}")
+    st.subheader(f"Assessment for version {label}")
     
     with st.container():
         st.markdown(
@@ -293,18 +293,6 @@ def _show_assessment_section(label: str, poi_index: int) -> None:
 
 def _show_assessment_forms(poi_index: int) -> None:
     """Helper function to display comparative assessment forms."""
-    st.markdown("---")
-    st.subheader("General Question")
-    st.markdown('<p class="question-font">Have you ever visited this place??</p>', unsafe_allow_html=True)
-    st.radio(
-        "Visited",
-        options=["No Selection", "Yes", "No", "Prefer not to answer"],
-        key=f"isvisited_{poi_index}",
-        horizontal=True,
-        label_visibility="collapsed",
-        index=0  # Set "No Selection" as default
-    )
-
     st.markdown("---")
     st.subheader("Comparative Assessment")
     
@@ -358,6 +346,17 @@ def _show_assessment_forms(poi_index: int) -> None:
         "Description",
         options=["No Selection", "Version A", "Version B", "Both equally"],
         key=f"description_{poi_index}",
+        horizontal=True,
+        label_visibility="collapsed",
+        index=0  # Set "No Selection" as default
+    )
+    st.markdown("---")
+    st.subheader("General Question")
+    st.markdown('<p class="question-font">Have you ever visited this place??</p>', unsafe_allow_html=True)
+    st.radio(
+        "Visited",
+        options=["No Selection", "Yes", "No", "Prefer not to answer"],
+        key=f"isvisited_{poi_index}",
         horizontal=True,
         label_visibility="collapsed",
         index=0  # Set "No Selection" as default

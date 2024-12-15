@@ -9,7 +9,7 @@
                 "position": [41.9028, 12.4829],
                 "title": "Hotel Hassler Roma",
                 "description": "Hassler Roma is a legendary five-star luxury hotel atop the Spanish Steps, renowned for offering an unforgettable experience in Rome's historic heart. Just minutes from landmarks like the Pantheon, St. Peter's Basilica, the Colosseum, and Trevi Fountain, it boasts 87 elegant rooms and suites. Owned by Roberto E. Wirth, a fifth-generation Swiss hotelier, the Hassler features exceptional dining, including the Michelin-starred Imàgo, Salone Eva, Palm Court, and the nearby Il Palazzetto Wine Bar. Known for its elegance, style, and impeccable service, the Hassler Roma epitomizes international luxury hospitality.",
-                "imagesrc": "./assets/images/Hassler_Roma.png",
+                "imagesrc": "./assets/images/Hassler_Roma.webp",
                 "source": "https://www.tripadvisor.in/Hotel_Review-g187791-d191332-Reviews-Hotel_Hassler-Rome_Lazio.html"
               },
               {
@@ -17,7 +17,7 @@
                 "position": [51.5079, -0.1419],
                 "title": "The Savoy",
                 "description": "The Savoy is the only luxury hotel on the River Thames. The ballet, opera, and theatre of vibrant Covent Garden are just steps away, with the City, world-renowned museums and galleries, and the designer shopping of Knightsbridge and Mayfair within easy reach. The Savoy has been woven into the fabric of London for almost 130 years, with exceptional service and memorable experiences at the heart of everything. Our team work hard to prepare for our guests and have implemented a range of measures to look after your well-being, but one thing remains a constant – the warmth of our Savoy welcome.",
-                "imagesrc": "./assets/images/savoylondon.png",
+                "imagesrc": "./assets/images/savoylondon.webp",
                 "source": "https://www.thesavoylondon.com/"
               }
           ]
@@ -31,7 +31,7 @@
                 "position": [46.5777, 7.9906],
                 "title": "Jungfraujoch - Top of Europe",
                 "description": "Located in the heart of the Swiss Alps, Jungfraujoch is a breathtaking destination known as the 'Top of Europe.' Visitors can enjoy panoramic views of the Aletsch Glacier, Europe's longest glacier, and partake in activities such as snow tubing, ice palace tours, and scenic walks. Accessible by a historic cogwheel train, this spot is a must-visit for nature lovers and adventure seekers.",
-                "imagesrc": "./assets/images/jungfrau.png",
+                "imagesrc": "./assets/images/jungfrau.webp",
                 "source": "https://www.jungfrau.ch/"
               },
               {
@@ -39,7 +39,7 @@
                 "position": [47.5576, 10.7498],
                 "title": "Neuschwanstein Castle",
                 "description": "Visiting the magical Neuschwanstein Castle in Bavaria by train makes it an even more unforgettable experience. On this tour, relax on the journey from Munich to Füssen, where you have the option to walk up to the castle or ride to the castle by horse-drawn carriage. Save valuable vacation time with skip-the-line entry and learn more about the complex's fascinating history with an included guided tour. Note: The bus ride replaces the train during certain months.",
-                "imagesrc": "./assets/images/neuschwanstein.png",
+                "imagesrc": "./assets/images/neuschwanstein.webp",
                 "source": "https://www.neuschwanstein.de/englisch/"
               }
           ]
@@ -53,7 +53,7 @@
                 "position": [50.9406, 6.9599],
                 "title": "Cologne Carnival",
                 "description": "The Cologne Carnival, held annually in February, is one of Germany's largest and most vibrant festivals. Known as the 'fifth season,' it features parades, costumes, and lively street parties. The highlight is Rose Monday, when colorful floats fill the streets. It’s a unique cultural experience celebrating joy and tradition.",
-                "imagesrc": "./assets/images/colone_carnival.png",
+                "imagesrc": "./assets/images/colone_carnival.webp",
                 "source": "https://www.cologne.de/"
               },
               {
@@ -64,7 +64,7 @@
                   ],
                   "title": "Cannstatter Volksfest",
                   "description": "Cannstatter Volksfest in Stuttgart strikes a perfect balance between its funfair and beer celebration, managing to draw both families looking for wholesome fun and revelers seeking rowdier excitement. Over 17 days in late September and early October, about 4 million visitors sample the giant array of funfair rides and attractions, sway under the vibrant canopies of giant beer tents, and peruse myriad stalls in the lively traders' market. Opening day kicks off with the mayor tapping the first keg, while sensational musical fireworks close out the event over two weeks later. In between, the grand parade on the first Sunday and the hot air balloon race the following Sunday serve as festival highlights.",
-                  "imagesrc": "assets/images/Volksfest.png",
+                  "imagesrc": "assets/images/Volksfest.webp",
                   "source": "https://www.tripadvisor.com/Attraction_Review-g187291-d8820178-Reviews-Cannstatter_Volksfest-Stuttgart_Baden_Wurttemberg.html"
               }
           ]
@@ -78,7 +78,7 @@
                 "position": [41.8902, 12.4922],
                 "title": "Colosseum",
                 "description": "The Colosseum is an iconic symbol of ancient Rome, built in 80 AD to host gladiatorial games and public spectacles. This massive amphitheater could hold up to 50,000 spectators, showcasing the engineering marvels of its time. Visitors can explore its grand arena, underground passages, and upper tiers, gaining insight into Roman society and architecture. The site also offers panoramic views of the nearby Roman Forum and Palatine Hill, making it a central hub for understanding Rome’s ancient heritage. With its well-preserved structure and rich history, the Colosseum remains one of Italy’s most visited landmarks.",
-                "imagesrc": "./assets/images/colosseo.png",
+                "imagesrc": "./assets/images/colosseo.webp",
                 "source": "https://www.coopculture.it/en/colosseo-e-shop.cfm"
               },
               {
@@ -86,7 +86,7 @@
                 "position": [48.8606, 2.3376],
                 "title": "Louvre Museum",
                 "description": "The Louvre Museum in Paris is the world's largest art museum and a historic monument. Once a royal palace, it houses over 35,000 artworks, including the renowned Mona Lisa and the Venus de Milo. Its iconic glass pyramid entrance is a modern architectural masterpiece. Visitors can explore collections spanning from ancient civilizations to the 19th century, immersing themselves in the beauty of global art history. With its diverse exhibits and captivating ambiance, the Louvre offers an unforgettable cultural experience.",
-                "imagesrc": "./assets/images/louvre.png",
+                "imagesrc": "./assets/images/louvre.webp",
                 "source": "https://www.louvre.fr/en"
               }
           ]
@@ -100,7 +100,7 @@
           "position": [41.9038, 12.4820],
           "title": "Via del Corso",
           "description": "Via del Corso, a lively 1.5-kilometer shopping street in Rome, connects Piazza Venezia to Piazza del Popolo and caters to all budgets, from luxury brands to affordable stores. Part of the historic 'Trident' from the 15th to 17th centuries, it links Porta del Popolo to major basilicas like St. Peter's. Nearby, high-fashion streets like Via dei Condotti and Via Borgognona feature exclusive brands and chic boutiques, making Via del Corso a must-visit for shopping and Roman culture.",
-          "imagesrc": "./assets/images/via_del_corso.png",
+          "imagesrc": "./assets/images/via_del_corso.webp",
           "source": "https://www.turismoroma.it/en"
         },
         {
@@ -108,7 +108,7 @@
             "position": [48.2027, 16.3684],
             "title": "Café Central, Vienna",
             "description": "Café Central, located in the heart of Vienna, is a legendary coffee house that has been a cornerstone of the city’s cultural and intellectual life since 1876. Housed in the stunning Palais Ferstel, its grand interior features soaring ceilings, elegant chandeliers, and marble pillars that exude old-world charm. Over the decades, Café Central became a meeting place for prominent thinkers, writers, and politicians, including Sigmund Freud, Leon Trotsky, and Stefan Zweig, earning it the nickname 'the living room of Vienna.' Today, it continues to enchant visitors with its timeless ambiance and dedication to Viennese coffeehouse traditions.",
-            "imagesrc": "./assets/images/Cafe-Central.png",
+            "imagesrc": "./assets/images/Cafe-Central.webp",
             "source": "https://www.cafecentral.wien/"
           }
           ]

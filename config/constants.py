@@ -79,6 +79,8 @@ CLARITY_SCALE = ["Very Unclear", "Unclear", "Neutral", "Clear", "Very Clear"]
 
 # Custom CSS styles
 CUSTOM_CSS = """
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     /* Primary theme color */
     div.stButton > button:first-child {
         background-color: #189c7d !important;
@@ -133,6 +135,15 @@ CUSTOM_CSS = """
     .stAlert {
         background-color: rgba(24, 156, 125, 0.1);
         border-left-color: #189c7d;
+    }
+    
+    /* Image styles */
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        object-fit: contain;
     }
     
     .big-font {

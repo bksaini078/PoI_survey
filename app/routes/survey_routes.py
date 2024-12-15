@@ -205,25 +205,40 @@ def show_poi_comparison(poi_data: Dict, poi_index: int) -> None:
 def _show_poi_descriptions(description_a: Dict, description_b: Dict, poi_index: int) -> None:
     """Helper function to display POI descriptions."""
     col1, col2 = st.columns(2)
-    
+
     for col, desc, label in [(col1, description_a, "A"), (col2, description_b, "B")]:
         with col:
             st.subheader(f"Version {label}")
             st.markdown(f"""
-                <div style="
-                    border: 1px solid #189c7d; 
-                    border-radius: 10px; 
-                    padding: 20px; 
-                    background-color: #f9f9f9; 
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-                    text-align: center;
-                    margin-bottom: 20px;">
-                    {img_to_html(desc["imagesrc"])}
-                    <p style="font-size: 24px; color: #189c7d; font-weight: bold; margin: 15px 0;">{desc["title"]}</p>
-                    <p style="font-size: 18px; text-align: justify; margin-bottom: 20px;">{desc["description"]}</p>
-                </div>
-            """, unsafe_allow_html=True)
-            
+                        <div style="border: 1px solid #189c7d; 
+                        border-radius: 10px; 
+                        padding: 20px; 
+                        background-color: #f9f9f9; 
+                        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+                        text-align: center; 
+                        margin-bottom: 20px; 
+                        font-family: Arial, sans-serif;">
+                        <div style="max-width: 100%; margin: 0 auto;">
+                            {img_to_html(desc["imagesrc"])}
+                        </div>
+                        <p style="
+                            font-size: 1.5em; 
+                            color: #189c7d; 
+                            font-weight: bold; 
+                            margin: 15px 0;">
+                            {desc["title"]}
+                        </p>
+                        <p style="
+                            font-size: 1em; 
+                            text-align: justify; 
+                            color: #333333; 
+                            line-height: 1.5; 
+                            margin-bottom: 20px;">
+                            {desc["description"]}
+                        </p>
+                    </div>""",
+                    unsafe_allow_html=True)
+
             st.markdown('<hr class="custom-divider" />', unsafe_allow_html=True)
             _show_assessment_section(label, poi_index)
 
@@ -490,9 +505,3 @@ def show_thank_you() -> None:
         
         SurveyResponseService.save_final_response(final_response)
         st.success("Thank you! Your responses have been saved. You may now close this survey.")
-        
-        # if st.button("Start New Survey"):
-        #     st.session_state.page = 0
-        #     st.session_state.user_data = {}
-        #     st.session_state.survey_responses = []
-        #     st.rerun()

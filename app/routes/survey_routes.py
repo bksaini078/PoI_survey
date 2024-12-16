@@ -355,7 +355,7 @@ def _show_assessment_forms(poi_index: int) -> None:
     st.markdown('<p class="question-font">What is your familiarity with this place?</p>', unsafe_allow_html=True)
     st.radio(
         "Visited",
-        options=["No","I have visited it in person.", "I have seen/heard about it online or from others.", "I have never heard of it before."],
+        options=["No Selection","I have visited it in person.", "I have seen/heard about it online or from others.", "I have never heard of it before."],
         key=f"isvisited_{poi_index}",
         horizontal=False,
         label_visibility="collapsed",
@@ -383,32 +383,43 @@ def _show_navigation_buttons(poi_data: Dict, poi_index: int, poi: Dict, is_manua
         if st.button("Next" if poi_index < len(poi_data["pois"]) - 1 else "Finish", type="primary"):
             _handle_navigation(poi_data, poi_index, poi, is_manual_first)
 
-def _validate_responses(poi_index: int) -> bool:
-    """Helper function to validate that all questions have been answered."""
-    fields_to_check = [
-        f"manual_significance_{poi_index}",
-        f"manual_trust_{poi_index}",
-        f"manual_clarity_{poi_index}",
-        f"ai_significance_{poi_index}",
-        f"ai_trust_{poi_index}",
-        f"ai_clarity_{poi_index}",
-        f"engaging_{poi_index}",
-        f"relevant_{poi_index}",
-        f"eager_{poi_index}",
-        f"title_{poi_index}",
-        f"description_{poi_index}",
-    ]
+def _validate_responses(poi_index: int) -> Tuple[bool, list]:
+    """Helper function to validate that all questions have been answered.
     
-    for field in fields_to_check:
+    Returns:
+        Tuple[bool, list]: A tuple containing:
+            - bool: True if all questions are answered, False otherwise
+            - list: List of unanswered questions
+    """
+    fields_to_check = {
+        f"manual_significance_{poi_index}": "Significance rating for Version A",
+        f"manual_trust_{poi_index}": "Trust rating for Version A",
+        f"manual_clarity_{poi_index}": "Clarity rating for Version A",
+        f"ai_significance_{poi_index}": "Significance rating for Version B",
+        f"ai_trust_{poi_index}": "Trust rating for Version B",
+        f"ai_clarity_{poi_index}": "Clarity rating for Version B",
+        f"engaging_{poi_index}": "Which description was more engaging",
+        f"relevant_{poi_index}": "Which description provided more relevant information",
+        f"eager_{poi_index}": "Which description would make you more eager to visit",
+        f"title_{poi_index}": "Which title was more appealing",
+        f"description_{poi_index}": "Overall better description",
+        f"isvisited_{poi_index}": "Your familiarity with this place"
+    }
+    
+    unanswered_questions = []
+    for field, question_text in fields_to_check.items():
         if st.session_state[field] == "No Selection" :
-            return False
-    return True
+            unanswered_questions.append(question_text)
+    
+    return len(unanswered_questions) == 0, unanswered_questions
 
 def _handle_navigation(poi_data: Dict, poi_index: int, poi: Dict, is_manual_first: bool) -> None:
     """Helper function to handle navigation logic and response saving."""
     # Validate all questions have been answered
-    if not _validate_responses(poi_index):
-        st.error("Please provide feedback for all questions before proceeding.")
+    is_valid, unanswered_questions = _validate_responses(poi_index)
+    if not is_valid:
+        error_message = "Please answer the following questions before proceeding:\n" + "\n".join(f"- {q}" for q in unanswered_questions)
+        st.error(error_message)
         return
     
     response = {

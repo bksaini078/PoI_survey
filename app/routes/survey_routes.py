@@ -352,12 +352,12 @@ def _show_assessment_forms(poi_index: int) -> None:
     )
     st.markdown("---")
     st.subheader("General Question")
-    st.markdown('<p class="question-font">Have you ever visited this place??</p>', unsafe_allow_html=True)
+    st.markdown('<p class="question-font">What is your familiarity with this place?</p>', unsafe_allow_html=True)
     st.radio(
         "Visited",
-        options=["No Selection", "Yes", "No", "Prefer not to answer"],
+        options=["No","I have visited it in person.", "I have seen/heard about it online or from others.", "I have never heard of it before."],
         key=f"isvisited_{poi_index}",
-        horizontal=True,
+        horizontal=False,
         label_visibility="collapsed",
         index=0  # Set "No Selection" as default
     )
@@ -397,11 +397,10 @@ def _validate_responses(poi_index: int) -> bool:
         f"eager_{poi_index}",
         f"title_{poi_index}",
         f"description_{poi_index}",
-        f"isvisited_{poi_index}"
     ]
     
     for field in fields_to_check:
-        if st.session_state[field] == "No Selection":
+        if st.session_state[field] == "No Selection" :
             return False
     return True
 

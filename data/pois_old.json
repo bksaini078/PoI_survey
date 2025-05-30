@@ -1,0 +1,144 @@
+{
+  "categories": [
+      {
+          "name": "Accommodation",
+          "color": "blue",
+          "pois": [
+              {
+                  "id": 6,
+                  "position": [
+                      48.7750,
+                      9.1830
+                  ],
+                  "title": "Mövenpick Hotel Stuttgart Airport",
+                  "description": "The Movenpick Hotel Stuttgart Airport in Germany is a superior hotel with direct access to the airport, the ICS International Congress Center Stuttgart, and the Messe Stuttgart. Discover a destination which gives you a perfect balance between business and leisure. Enjoy a day in Stuttgart's city center, easily accessible by car or public transportation within 20 minutes or relax in our fitness area.",
+                  "imagesrc": "./assets/images/Movenpick.png",
+                  "source": "https://www.tripadvisor.com/Hotel_Review-g187291-d647452-Reviews-Movenpick_Hotel_Stuttgart_Airport-Stuttgart_Baden_Wurttemberg.html"
+              },
+              {
+                  "id": 16,
+                  "position": [
+                      48.7790,
+                      9.1870
+                  ],
+                  "title": "Pullman Stuttgart Fontana",
+                  "description": "The Pullman Stuttgart Fontana is located directly at the Vaihingen train station and has direct access to the A8 motorway. The New Trade Fair, Stuttgart Airport and Stuttgart city center with the main train station can be reached as quickly as the musical theater. The hotel has its own underground car park with 110 parking spaces and direct access to the hotel lobby. Our 252 hotel rooms offer all the amenities of a 4 star superior hotel. The 1200 m² Fit & Spa Lounge with pool, sauna, sanarium, whirlpool and a sun terrace invites you to relax and unwind. For business lunch or dinner, visit our restaurant with outdoor terrace and enjoy regional and international food. The vibrant centerpiece of the hotel is the Fontana Bar. Indulge in fine wines, draft beer and international cocktails, as well as hot and cold snacks such as the classic Caesar salad or our Pullman burger.",
+                  "imagesrc": "assets/images/Pullmann.png",
+                  "source": "https://www.tripadvisor.com/Hotel_Review-g187291-d202429-Reviews-Pullman_Stuttgart_Fontana-Stuttgart_Baden_Wurttemberg.html"
+              }
+          ]
+      },
+      {
+          "name": "Natural Attractions",
+          "color": "green",
+          "pois": [
+              {
+                  "id": 8,
+                  "position": [
+                      48.7790,
+                      9.1800
+                  ],
+                  "title": "Wilhelma - zoo and botanical garden",
+                  "description": "More than one million visitors are attracted to Wihelma every year. The diversity of animals and plants is remarkable. And not only that: the flair of “1001 Nights” also makes the zoo something special. When King Wilhelm I had the idea of building a bathhouse below Rosenstein Palace at the beginning of the 19th century, Wilhelma was born. The plan for the bathhouse quickly grew into a pleasure garden with pavilions, walkways, lakes and a banqueting hall. Everything was designed in the Moorish style, bringing a touch of “1001 Nights” to the Neckar. After the end of the monarchy, the royal pleasure garden was opened to the public as a botanical garden. However, the zoological history of Wilhelma only began after the Second World War with an aquarium show in 1949. Further exhibitions with living exhibits followed and after each show the wild animals remained at Wilhelma.",
+                  "imagesrc": "assets/images/Wilhelma.png",
+                  "source": "https://www.stuttgart.de/tourismus/sehenswuerdigkeiten/zoo-wilhelma.php"
+              },
+              {
+                  "id": 18,
+                  "position": [
+                      48.7820,
+                      9.1770
+                  ],
+                  "title": "Stuttgart Forest",
+                  "description": "The forest has a very high value in Stuttgart. It provides space for many animals and plants and makes a significant contribution to relieving the ecosystem. For the people of Stuttgart, the forest offers above all the opportunity to relax and unwind in nature. The forest is Stuttgart’s largest recreational area and covers 5,000 hectares, or 24 percent of the city. 56 percent (2,700 hectares) of this is also owned by the city of Stuttgart. The second largest forest owner in Stuttgart is the state of Baden-Württemberg with its forestry company ForstBW. The majority of these areas are managed by the  Schönbuch forest district.",
+                  "imagesrc": "assets/images/Forest.png",
+                  "source": "https://www.stuttgart.de/leben/natur/wald/"
+              }
+          ]
+      },
+      {
+          "name": "Entertainment",
+          "color": "red",
+          "pois": [
+              {
+                  "id": 10,
+                  "position": [
+                      48.7710,
+                      9.1810
+                  ],
+                  "title": "Stuttgarter Weihnachtsmarkt",
+                  "description": "For nearly a month leading up to Christmas, the Stuttgarter Weihnachtsmarkt welcomes over 3 million visitors to shop for wood toys, figurines, and antiques and warm their bellies with mulled wine and fresh gingerbread. Little ones scoot about Children's Fairyland, riding the steam train, designing their own candles, and snacking on chocolate-covered fruit. The market's nativity scene features live lambs, sheep, donkeys, and a goat, and crowds gather for daily concerts performed by choirs and music groups from the Stuttgart region. A tradition dating back over 300 years, the Stuttgarter Weihnachtsmarkt stands as one of Europe's oldest and most lively Christmas markets.",
+                  "imagesrc": "assets/images/Weihnachtsmarkt.png",
+                  "source": "https://www.tripadvisor.com/Attraction_Review-g187291-d8820363-Reviews-Stuttgarter_Weihnachtsmarkt-Stuttgart_Baden_Wurttemberg.html"
+              },
+              {
+                  "id": 11,
+                  "position": [
+                      48.7720,
+                      9.1820
+                  ],
+                  "title": "Cannstatter Volksfest",
+                  "description": "Cannstatter Volksfest in Stuttgart strikes a perfect balance between its funfair and beer celebration, managing to draw both families looking for wholesome fun and revelers seeking rowdier excitement. Over 17 days in late September and early October, about 4 million visitors sample the giant array of funfair rides and attractions, sway under the vibrant canopies of giant beer tents, and peruse myriad stalls in the lively traders' market. Opening day kicks off with the mayor tapping the first keg, while sensational musical fireworks close out the event over two weeks later. In between, the grand parade on the first Sunday and the hot air balloon race the following Sunday serve as festival highlights.",
+                  "imagesrc": "assets/images/Volksfest.png",
+                  "source": "https://www.tripadvisor.com/Attraction_Review-g187291-d8820178-Reviews-Cannstatter_Volksfest-Stuttgart_Baden_Wurttemberg.html"
+              }
+          ]
+      },
+      {
+          "name": "Cultural and Historical Sites",
+          "color": "orange",
+          "pois": [
+              {
+                  "id": 4,
+                  "position": [
+                      48.7741,
+                      9.1798
+                  ],
+                  "title": "Stuttgart Palace Square",
+                  "description": "The Schlossplatz is a green gem in the heart of Stuttgart - and is located directly on the shopping mile Königstraße. Tourists and locals alike like to take a break and enjoy the Mediterranean atmosphere. With its rows of trees, fountains and fields of flowers, Schlossplatz is today considered one of the most beautiful squares in Europe. This was not always the case in the past. At the beginning of the 19th century, Schlossplatz was just a parade and drill ground. It was not until the 1860s that the dusty area was transformed into a blooming flower garden. The baroque garden with its intersecting paths and colorful flowers is a real jewel. There are the beautiful fountains, erected in honor of King William I in 1863, in which many a city dweller cools off on a hot day. There is the cast-iron bandstand with Moorish decorated arches, where military bands played every Sunday for many years.",
+                  "imagesrc": "assets/images/Schlossplatz.png",
+                  "source": "https://www.stuttgart.de/tourismus/sehenswuerdigkeiten/schlossplatz.php?form=translationDisclaimer-MTMzMDAwMjQ5&action=submit#translationDisclaimer-MTMzMDAwMjQ5"
+              },
+              {
+                  "id": 23,
+                  "position": [
+                      48.7760,
+                      9.1800
+                  ],
+                  "title": "Mercedes-Benz Museum",
+                  "description": "The Museum celebrates the automobile invented by Carl Benz in 1886: it relates its history and tells its stories, bringing both alive by placing them in the context of technology, day-to-day life, social history and popular culture. More than 160 vehicles of all types are the main protagonists. They range from some of the oldest automobiles ever built to legendary racing cars and futuristic research vehicles. Together with other exhibits, they form the centrepiece of the permanent exhibition covering a total of 16,500 square metres in twelve rooms. This unparalleled world can be discovered on two tours that follow a 'Legend' and 'Collection' narrative.",
+                  "imagesrc": "assets/images/Mercedes.png",
+                  "source": "https://www.tripadvisor.com/Attraction_Review-g187291-d243381-Reviews-Mercedes_Benz_Museum-Stuttgart_Baden_Wurttemberg.html"
+              }
+          ]
+      },
+      {
+          "name": "Commercial and Shopping",
+          "color": "teal",
+          "pois": [
+              {
+                  "id": 12,
+                  "position": [
+                      48.7730,
+                      9.1835
+                  ],
+                  "title": "Konigsbau Passagen",
+                  "description": "Planning a trip to Stuttgart? Enjoy an incredible shopping experience – welcome to the Königsbau Passagen! International brands, top-quality beauty products, extraordinary accessories, over 30 culinary highlights and excellent service, all under one roof. For a wonderful shopping day with the whole family!",
+                  "imagesrc": "assets/images/Konigsbau.png",
+                  "source": "https://www.tripadvisor.com/Attraction_Review-g187291-d5798646-Reviews-Konigsbau_Passagen-Stuttgart_Baden_Wurttemberg.html"
+              },
+              {
+                  "id": 13,
+                  "position": [
+                      48.7740,
+                      9.1845
+                  ],
+                  "title": "Rotenberger Weingaertle",
+                  "description": "Cosy restaurant offering local and typically Swabian cuisine. Located in one of the most scenic locations around Stuttgart, only 5 minutes walking distance to the popular tourist hotspot Grabkapelle auf dem Württemberg.",
+                  "imagesrc": "assets/images/Graka.png",
+                  "source": "https://www.tripadvisor.com/Restaurant_Review-g187291-d1342000-Reviews-Rotenberger_Weingaertle-Stuttgart_Baden_Wurttemberg.html"
+              }
+          ]
+      }
+  ]
+}

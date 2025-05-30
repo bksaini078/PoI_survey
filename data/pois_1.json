@@ -4,17 +4,17 @@
           "name": "Accommodation",
           "color": "blue",
           "pois": [
-              {
-                  "id": 6,
-                  "position": [
-                      48.7750,
-                      9.1830
-                  ],
-                  "title": "Mövenpick Hotel Stuttgart Airport",
-                  "description": "The Movenpick Hotel Stuttgart Airport in Germany is a superior hotel with direct access to the airport, the ICS International Congress Center Stuttgart, and the Messe Stuttgart. Discover a destination which gives you a perfect balance between business and leisure. Enjoy a day in Stuttgart's city center, easily accessible by car or public transportation within 20 minutes or relax in our fitness area.",
-                  "imagesrc": "assets/images/Mövenpick.png",
-                  "source": "https://www.tripadvisor.com/Hotel_Review-g187291-d647452-Reviews-Movenpick_Hotel_Stuttgart_Airport-Stuttgart_Baden_Wurttemberg.html"
-              }
+            {
+                "id": 16,
+                "position": [
+                    48.7790,
+                    9.1870
+                ],
+                "title": "Pullman Stuttgart Fontana",
+                "description": "The Pullman Stuttgart Fontana is located directly at the Vaihingen train station and has direct access to the A8 motorway. The New Trade Fair, Stuttgart Airport and Stuttgart city center with the main train station can be reached as quickly as the musical theater. The hotel has its own underground car park with 110 parking spaces and direct access to the hotel lobby. Our 252 hotel rooms offer all the amenities of a 4 star superior hotel. The 1200 m² Fit & Spa Lounge with pool, sauna, sanarium, whirlpool and a sun terrace invites you to relax and unwind. For business lunch or dinner, visit our restaurant with outdoor terrace and enjoy regional and international food. The vibrant centerpiece of the hotel is the Fontana Bar. Indulge in fine wines, draft beer and international cocktails, as well as hot and cold snacks such as the classic Caesar salad or our Pullman burger.",
+                "imagesrc": "assets/images/Pullmann.png",
+                "source": "https://www.tripadvisor.com/Hotel_Review-g187291-d202429-Reviews-Pullman_Stuttgart_Fontana-Stuttgart_Baden_Wurttemberg.html"
+            }
         ]
     }
 ]

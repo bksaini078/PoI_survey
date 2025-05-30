@@ -1,7 +1,7 @@
 """Configuration settings for the data processing pipeline."""
 
 # Input directories
-SURVEY_RESULTS_DIR = "../survey_results"
+SURVEY_RESULTS_DIR = "../survey_results/survey_response/"
 
 # Output files
 SURVEY_RESPONSES_OUTPUT = "processed_survey_responses.csv"
